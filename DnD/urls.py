@@ -16,9 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from map.views import index
+from map.admin import Country
+from map.views import index, about_Country, about_City
+from Hero.views import about_hero_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
+    path('hero/<slug:hero_slug>/',about_hero_page),
+    path('location_info/<slug:country_slug>/',about_Country,name='country_page'),
+    path('location_info/<slug:country_slug>/<slug:city_slug>',about_City,name='city_page'),
 ]

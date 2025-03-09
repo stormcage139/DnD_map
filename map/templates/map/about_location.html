@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о герое</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .description {
+            white-space: pre-wrap;
+            text-align: justify;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background: #fafafa;
+        }
+        .cities {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{{ hero.image.url }}" alt="">
+        <h1>{{ location.name }}</h1>
+        <h3>Описание:</h3>
+        <div class="description">{{ location.description }}</div>
+        <div class="description">Статус {{ location.status }}</div>
+        <div class="description">Население {{ location.population }}</div>
+        {% if location.Land %}
+            <div class="description">
+                <a href="{% url 'country_page'  location.Land.slug  %}">Принадлежность {{ location.Land.name }}</a>
+            </div>
+        {% endif %}
+        {% if location.cities %}
+            <p>Города входящие в страну:</p>
+            {% for city in location.cities.all %}
+            <div class="description">
+                <a href="{% url 'city_page' location.slug  city.slug  %}">{{ city.name }}</a>
+            </div>
+            {% endfor %}
+        {% endif %}
+        <div class="cities">
+            <!-- <h3>Посещённые города:</h3> -->
+            <!-- <ul>
+                {% for city in hero.visited_cities.all %}
+                    <li>{{ city.name }}</li>
+                {% empty %}
+                    <li>Герой пока не посетил ни одного города.</li>
+                {% endfor %}
+            </ul> -->
+        </div>
+    </div>
+</body>
+</html>
