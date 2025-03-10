@@ -39,14 +39,30 @@
 <body>
     <div class="container">
         <img src="{{ hero.image.url }}" alt="">
-        <h1>{{ location.name }}</h1>
+        {% if location.capital %}
+            <h1>Страна {{ location.name }}</h1>
+        {% elif location.is_city == True  %}
+            <h1>Город {{ location.name }}</h1>
+        {% else %}
+            <h1>Поселение {{ location.name }}</h1>
+        {% endif %}
+
+        {% if location.capital %}
+        
+        <h2> Столица:
+            <a href="{% url 'city_page' location.slug location.capital.slug %}">г. {{ location.capital.name }} </a>
+
+        </h2>
+        {% endif %}
         <h3>Описание:</h3>
         <div class="description">{{ location.description }}</div>
-        <div class="description">Статус {{ location.status }}</div>
-        <div class="description">Население {{ location.population }}</div>
+        <div class="description">Статус {{ location.get_status_display }}</div>
+        <div class="description">Население {{ location.get_population_display }}</div>
+        <div class="description" id='Глава локации'>{{ location.glava }}</div>
         {% if location.Land %}
+            <p> Принадлежность: </p>
             <div class="description">
-                <a href="{% url 'country_page'  location.Land.slug  %}">Принадлежность {{ location.Land.name }}</a>
+                <a href="{% url 'country_page'  location.Land.slug  %}"> {{ location.Land.name }}</a>
             </div>
         {% endif %}
         {% if location.cities %}
@@ -57,15 +73,20 @@
             </div>
             {% endfor %}
         {% endif %}
+        {% if location.npcs %}
         <div class="cities">
-            <!-- <h3>Посещённые города:</h3> -->
-            <!-- <ul>
-                {% for city in hero.visited_cities.all %}
-                    <li>{{ city.name }}</li>
+            <h3>Связанные НПС:</h3>
+            <ul>
+                {% for npc in location.npcs.all %}
+                    <li><a href=" {% url 'npc_page' npc.slug %}">{{ npc.name }}</a></li>
                 {% empty %}
-                    <li>Герой пока не посетил ни одного города.</li>
+                    <li>Неизвестно</li>
                 {% endfor %}
-            </ul> -->
+            </ul>
+        </div>
+        {% endif %}
+        <div style="display: flex;justify-content: flex-end;">
+            <a href="{% url 'index' %}">Вернуться на карту</a>
         </div>
     </div>
 </body>

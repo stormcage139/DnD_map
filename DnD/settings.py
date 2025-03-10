@@ -25,9 +25,9 @@ SECRET_KEY = 'django-insecure-nq4bhcv$^ac=m9szldu#(+i*conoc*b@gc$x*7tro3umqda0qg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-
+CSRF_TRUSTED_ORIGINS = ['https://dnd-map.cloudpub.ru']
 # Application definition
 
 INSTALLED_APPS = [
@@ -107,7 +107,7 @@ AUTH_USER_MODEL = 'map.Hero_m'
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 

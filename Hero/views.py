@@ -1,9 +1,13 @@
 from django.shortcuts import render
-from Hero.admin import Hero_m
+from map.models import Hero_m,NPC
 # Create your views here.
 
 def about_hero_page(request,hero_slug):
     user = Hero_m.objects.get(slug=hero_slug)
-    print(user)
     context = {'hero': user}
     return render(request,'Hero/about_hero.html',context=context)
+
+def about_npc_page(request,npc_slug):
+    current_npc = NPC.objects.get(slug=npc_slug)
+    context = {'npc': current_npc}
+    return render(request,'Hero/about_npc.html',context=context)
