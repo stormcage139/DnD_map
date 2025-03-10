@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+LOGIN_URL = 'login_page'
+
 CSRF_TRUSTED_ORIGINS = ['https://dnd-map.cloudpub.ru']
 # Application definition
 

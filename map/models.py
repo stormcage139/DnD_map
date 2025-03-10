@@ -34,6 +34,7 @@ class Location(models.Model):
     status = models.CharField(max_length=50,null=True,choices=statuses)
     population = models.CharField(max_length=50,null=True,choices=race)
     npcs = models.ManyToManyField("map.NPC", verbose_name="Кто здесь бывал",blank=True)
+    what_adventures = models.ManyToManyField("map.Dnd_adventure", verbose_name="В каких приключения был",blank=True)
 
     def __str__(self):
         return self.name
