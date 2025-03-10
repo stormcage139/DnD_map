@@ -35,8 +35,8 @@ class Location(models.Model):
     slug = models.SlugField(max_length=60,unique=True)
     status = models.CharField(max_length=50,null=True,choices=statuses)
     population = models.CharField(max_length=50,null=True,choices=race)
-    npcs = models.ManyToManyField("map.NPC", verbose_name="Кто здесь бывал",blank=True)
-    what_adventures = models.ManyToManyField("map.Dnd_adventure", verbose_name="В каких приключения был",blank=True)
+    npcs = models.ManyToManyField("map.NPC", verbose_name="Ключевые NPC",blank=True)
+    what_adventures = models.ManyToManyField("map.Dnd_adventure", verbose_name="В каких приключениях принимал участие",blank=True)
 
     def __str__(self):
         return self.name
@@ -50,6 +50,8 @@ class Country(Location):
     class Meta:
         verbose_name = "Страна"
         verbose_name_plural = "Страны"
+
+
     
 class Vilage(Location):
     glava = models.OneToOneField("map.NPC", verbose_name=("Представитель"), on_delete=models.SET_NULL,null=True,blank=True,default='Неизвестно')
@@ -102,7 +104,7 @@ class NPC(models.Model):
         verbose_name_plural = "НПСи"
 
 class Visit(models.Model):
-    hero = models.ForeignKey(Hero_m, on_delete=models.CASCADE)
+    hero = models.ForeignKey(Hero_m, on_delete=models.CASCADE,related_name='what_visits')
     city = models.ForeignKey(Location, on_delete=models.CASCADE)
     visited_at = models.DateTimeField(auto_now_add=True)
     
@@ -114,10 +116,10 @@ class Visit(models.Model):
     
 
 class Dnd_adventure(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    heroes = models.ManyToManyField(to=Hero_m,blank=True)
-    npcs = models.ManyToManyField(to=NPC,blank=True)
+    name = models.CharField(max_length=100,verbose_name='Название приключения')
+    description = models.TextField(verbose_name='Описание приключения')
+    heroes = models.ManyToManyField(to=Hero_m,blank=True,verbose_name='Учавствовашие герои')
+    npcs = models.ManyToManyField(to=NPC,blank=True,verbose_name='Учавствовавшие NPCи')
     def __str__(self):
         return self.name
     class Meta:

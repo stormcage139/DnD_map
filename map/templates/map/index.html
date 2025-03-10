@@ -46,16 +46,11 @@
                 <li class="current-menu-item"><a href="#" ><b>Главная</b></a></li>
                 <li class="menu-parent-item"><a href="#"><b>Герои D&D</b><i></i></a>
                 <ul class="sub-menu">
-                    <li><a href="#"><b>Какая-то услуга 1</b></a></li>
-                    <li><a href="#"><b>Какая-то услуга 2</b></a></li>
-                    <li><a href="#"><b>Какая-то услуга 4</b></a></li>
-                    <li><a href="#"><b>Какая-то услуга 1</b></a></li>
-                    <li><a href="#"><b>Какая-то услуга 2</b></a></li>
-                    <li><a href="#"><b>Какая-то услуга 4</b></a></li>
-                    <li><a href="#"><b>Какая-то услуга 1</b></a></li>
-                    <li><a href="#"><b>Какая-то услуга 2</b></a></li>
-                    <li><a href="#"><b>Какая-то услуга 4</b></a></li>
-                    <li><a href="#"><b>Какая-то услуга 1</b></a></li>
+                    {% for hero in heroes %}
+                    {% if hero.slug %}
+                        <li><a href="{% url 'hero_page' hero.slug %}"><b>{{ hero.username }}</b></a></li>
+                    {% endif %}
+                    {% endfor %}
                 </ul>
 	            </li>
 	            <li><a href="#"><b>Клиентам</b></a></li>

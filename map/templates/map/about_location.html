@@ -68,10 +68,18 @@
             </div>
         {% endif %}
         {% if location.cities %}
-            <p>Города входящие в страну:</p>
+            <p>Города входящие в страну: {{ location.city_exists }}</p>
             {% for city in location.cities.all %}
             <div class="description">
                 <a href="{% url 'city_page' location.slug  city.slug  %}">{{ city.name }}</a>
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% if location.villages %}
+            <p>Деревни входящие в страну:</p>
+            {% for village in location.villages.all %}
+            <div class="description">
+                <a href="{% url 'vilage_page' location.slug  village.slug  %}">Деревня {{ village.name }}</a>
             </div>
             {% endfor %}
         {% endif %}

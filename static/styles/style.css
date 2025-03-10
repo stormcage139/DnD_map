@@ -32,7 +32,7 @@ img {
 .map_wrapper{   
     left: 900px;
     top: 460px;
-    /* max-width: 2000px; */
+    max-width: 2000px;
     transform: scale(2);
     width: 100%;
     position: relative;
