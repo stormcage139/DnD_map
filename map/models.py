@@ -1,3 +1,5 @@
+from re import T
+from tkinter import NO
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -43,37 +45,24 @@ class Location(models.Model):
         verbose_name_plural = "Абстрактная модель(не трогай)"
     
 class Country(Location):
-    head_of_state = models.OneToOneField("map.NPC", verbose_name=("Правитель"), on_delete=models.SET_NULL,null=True,blank=True,default='Неизвестно')
-    capital = models.OneToOneField("map.City", verbose_name=("capital"), on_delete=models.SET_NULL,null=True,related_name="cap_of")
-
-    def glava(self):
-        if self.head_of_state is not None:
-            return 'Представитель: ' + self.head_of_state.name
-        return 'Представитель: Отсутствует' 
+    glava = models.OneToOneField("map.NPC", verbose_name=("Правитель"), on_delete=models.SET_NULL,null=True,blank=True,default='Неизвестно')
+    capital = models.OneToOneField("map.City", verbose_name=("Столица"), on_delete=models.SET_NULL,null=True,related_name="cap_of",blank=True)
     class Meta:
         verbose_name = "Страна"
         verbose_name_plural = "Страны"
     
 class Vilage(Location):
-    predstavitel = models.OneToOneField("map.NPC", verbose_name=("Представитель"), on_delete=models.SET_NULL,null=True,blank=True,default='Неизвестно')
+    glava = models.OneToOneField("map.NPC", verbose_name=("Представитель"), on_delete=models.SET_NULL,null=True,blank=True,default='Неизвестно')
     Land = models.ForeignKey(to=Country,on_delete=models.SET_NULL,null=True,related_name="villages")
-    def glava(self):
-        if self.predstavitel is not None:
-            return 'Представитель: ' + self.predstavitel.name
-        return 'Представитель: Отсутствует' 
     class Meta:
         verbose_name = "Деревня"
         verbose_name_plural = "Деревни"
 
 
 class City(Location):
-    mer = models.OneToOneField("map.NPC", verbose_name=("Мэр"), on_delete=models.SET_NULL,null=True,blank=True,default='Неизвестно')
+    glava = models.OneToOneField("map.NPC", verbose_name=("Мэр"), on_delete=models.SET_NULL,null=True,blank=True,default='Неизвестно')
     Land = models.ForeignKey(to=Country,on_delete=models.SET_NULL,null=True,related_name="cities")
 
-    def glava(self):
-        if self.mer is not None:
-            return 'Представитель: ' + self.mer.name
-        return 'Представитель: Отсутствует' 
 
     def is_city(self):
         return True
@@ -85,6 +74,7 @@ class City(Location):
 
 
 class Hero_m(AbstractUser):
+    email = None
     image = models.ImageField(upload_to='hero_picks/',blank=True)
     visited_cities = models.ManyToManyField(Location, through="Visit",blank=True)
     description = models.TextField(blank=True)

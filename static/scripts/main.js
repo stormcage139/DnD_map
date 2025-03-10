@@ -3,8 +3,8 @@ let popupBg = document.querySelector('.info__bg');
 let popup__photo = document.querySelector('.info__photo');
 let popup__title = document.querySelector('.info__title');
 let popup__text = document.querySelector('.info__text');
-let a__link = document.querySelector('.info__link');
 let tooltip = document.querySelector('.tooltip');
+let more__info = document.querySelector('.info__link')
 
 continents.forEach((item) => {
     item.addEventListener('click', function() {
@@ -12,8 +12,8 @@ continents.forEach((item) => {
         popup__photo.setAttribute('src', this.getAttribute('data-photo'));
         popup__text.textContent = this.getAttribute('data-description');
         popupBg.classList.add('active');
-        a__link.textContent = this.getAttribute('data-title');;
-        a__link.setAttribute('href', this.getAttribute('more-info'));
+		more__info.setAttribute('href',this.getAttribute('more-info'))
+		more__info.textContent = 'Подробнее о ' + this.getAttribute('data-title') 
     });
 
     // item.addEventListener('mouseenter', function() {
@@ -27,8 +27,8 @@ continents.forEach((item) => {
     // });
 
     // item.addEventListener('mousemove', function(e) {
-    //     tooltip.style.top = (e.y + 400) + 'px';
-    //     tooltip.style.left = (e.x + 400) + 'px';
+    //     tooltip.style.top = (e.y + 20) + 'px';
+    //     tooltip.style.left = (e.x + 20) + 'px';
     // });
 });
 
@@ -36,4 +36,46 @@ document.addEventListener('click', (e) => {
     if(e.target === popupBg) {
         popupBg.classList.remove('active');
     }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+
+	// получаем все элементы с классом pushmenu
+	const pushmenu = document.getElementsByClassName('pushmenu');
+
+	// получаем элемент с классом hidden-overley
+	const hiddenOverley = document.querySelector('.hidden-overley');
+
+	// отслеживаем клик клика по оверлею
+	hiddenOverley.addEventListener('click', (e) => {
+		e.currentTarget.classList.toggle('show');
+		document.querySelector('.sidebar').classList.toggle('show');
+		document.querySelector('body').classList.toggle('sidebar-opened');
+		for( i=0; i < pushmenu.length; i++ ){
+				pushmenu[i].classList.toggle('open');
+		}
+	});
+
+	const pushmenuFunction = function() {
+		document.querySelector('.pushmenu').classList.toggle('open');
+		document.querySelector('.sidebar').classList.toggle('show');
+		document.querySelector('.hidden-overley').classList.toggle('show');
+		document.body.classList.toggle('sidebar-opened')
+	};
+
+	// Отслеживаем клики кнопок с классом pushmenu 
+	for( i=0; i < pushmenu.length; i++ ){
+		pushmenu[i].addEventListener('click', pushmenuFunction, false);
+	}
+
+	// Получим все родительские элементы в меню
+	const sidebarAccordeon = document.querySelectorAll('.sidebar .menu-parent-item a:first-child');
+	const accordeonFunction =  function() { 
+		this.parentNode.querySelector('ul').classList.toggle('show');
+		this.querySelector('i').classList.toggle('rotate');
+	}
+	// Отслеживаем клики родительских пунктов меню 
+	for( i=0; i < sidebarAccordeon.length; i++ ){
+		sidebarAccordeon[i].addEventListener('click', accordeonFunction, false);
+	}
 });

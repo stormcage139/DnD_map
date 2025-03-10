@@ -56,9 +56,11 @@
         {% endif %}
         <h3>Описание:</h3>
         <div class="description">{{ location.description }}</div>
-        <div class="description">Статус {{ location.get_status_display }}</div>
-        <div class="description">Население {{ location.get_population_display }}</div>
-        <div class="description" id='Глава локации'>{{ location.glava }}</div>
+        <div class="description">Статус: {{ location.get_status_display }}</div>
+        <div class="description">Население: {{ location.get_population_display }}</div>
+        {% if location.glava %}
+        <div class="description" id='Глава локации'>Глава локации:<a href="{% url "npc_page" location.glava.slug %}">{{ location.glava }}</a></div>
+        {% endif %}
         {% if location.Land %}
             <p> Принадлежность: </p>
             <div class="description">

@@ -6,7 +6,24 @@ from django.contrib.auth.decorators import login_required
 
 def index(request):
     harinsford = Country.objects.get(slug='harinsford')
-    context = {'harinsford':harinsford}
+    cantov_hills = Country.objects.get(slug='cantov_hills')
+    edliada_forest = Country.objects.get(slug='edliada_forest')
+    helmogros = Country.objects.get(slug='helmogros')
+    flaoorn = Country.objects.get(slug='flaoorn')
+    harinsford = Country.objects.get(slug='harinsford')
+    harinsford = Country.objects.get(slug='harinsford')
+    context = {'harinsford':harinsford,
+               'cantov_hills':cantov_hills,
+               'edliada_forest':edliada_forest,
+               'helmogros': helmogros,
+               'flaoorn':   flaoorn,
+               'harinsford':harinsford,
+               'harinsford':harinsford,
+               'harinsford':harinsford,
+               'harinsford':harinsford,
+               'harinsford':harinsford,
+               'harinsford':harinsford,}
+               
     return render(request,'map/index.html',context=context)    
 
 
