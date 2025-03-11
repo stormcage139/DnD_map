@@ -20,3 +20,8 @@ def login_page(request):
             login(request, user)
             return HttpResponseRedirect('/')
     return render(request,'Hero/login.html')
+
+
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/')

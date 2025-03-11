@@ -47,14 +47,19 @@
                 <li class="menu-parent-item"><a href="#"><b>Герои D&D</b><i></i></a>
                 <ul class="sub-menu">
                     {% for hero in heroes %}
-                    {% if hero.slug %}
-                        <li><a href="{% url 'hero_page' hero.slug %}"><b>{{ hero.username }}</b></a></li>
+                    {% if hero.slug and hero.first_name %}
+                        <li><a href="{% url 'hero_page' hero.slug %}"><b>{{ hero.first_name }}</b></a></li>
                     {% endif %}
                     {% endfor %}
                 </ul>
 	            </li>
 	            <li><a href="#"><b>Клиентам</b></a></li>
 	            <li><a href="#"><b>Контакты</b></a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url "logout" %}"><b>Выйти из аккаунта {{ user.username }}</b></a></li>
+                {% else %}
+                <li><a href="{% url "login_page" %}"><b>Войти</b></a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>    

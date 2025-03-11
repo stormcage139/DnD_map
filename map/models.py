@@ -80,7 +80,7 @@ class Hero_m(AbstractUser):
     image = models.ImageField(upload_to='hero_picks/',blank=True)
     visited_cities = models.ManyToManyField(Location, through="Visit",blank=True)
     description = models.TextField(blank=True)
-    slug = models.SlugField(max_length=60)
+    slug = models.SlugField(max_length=60,unique=True)
     adventures = models.ManyToManyField("map.Dnd_adventure", verbose_name=("adventures"),blank=True)
     
     def __str__(self):
