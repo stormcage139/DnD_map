@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,18 +7,22 @@
     <title>Информация о герое</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            background-size: 2000px 1340px;
+            background-image: url({% static "images/svitok.png" %});
+            font-family: MyFont, sans-serif;
             margin: 20px;
             padding: 0;
-            background-color: #f4f4f4;
         }
         .container {
             width: 800px;
-            margin: auto;
-            background: white;
+            background-image: url({% static "images/zxczxc.png" %});
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .container:hover{
+            transform: translateY(-10px);
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
         h1 {
             text-align: center;
@@ -29,74 +34,90 @@
             overflow-y: auto;
             padding: 10px;
             border: 1px solid #ccc;
-            background: #fafafa;
         }
         .cities {
             margin-top: 20px;
         }
+
+        .ramka{
+            display: flex;
+            justify-content: center;
+        }
+
+        @font-face {
+            font-family: 'MyFont'; /* Название шрифта, которое вы будете использовать */
+            src: url({% static 'shrifts/1blackmoorletplain10.ttf' %}) format('ttf'), /* Путь к файлу шрифта */
+                url({% static 'shrifts/COPYRIGHT.txt' %}) format('txt');
+            font-weight: normal; /* Насыщенность шрифта */
+            font-style: normal; /* Стиль шрифта (обычный, курсив и т.д.) */
+}
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="{{ hero.image.url }}" alt="">
-        {% if location.capital %}
-            <h1>Страна {{ location.name }}</h1>
-        {% elif location.is_city == True  %}
-            <h1>Город {{ location.name }}</h1>
-        {% else %}
-            <h1>Поселение {{ location.name }}</h1>
-        {% endif %}
-
-        {% if location.capital %}
+    <div class="ramka">
+        <div class="between">
+            <div class="container">
+                <img src="{{ hero.image.url }}" alt="">
+                {% if location.capital %}
+                    <h1>Страна {{ location.name }}</h1>
+                {% elif location.is_city == True  %}
+                    <h1>Город {{ location.name }}</h1>
+                {% else %}
+                    <h1>Поселение {{ location.name }}</h1>
+                {% endif %}
         
-        <h2> Столица:
-            <a href="{% url 'city_page' location.slug location.capital.slug %}">г. {{ location.capital.name }} </a>
-
-        </h2>
-        {% endif %}
-        <h3>Описание:</h3>
-        <div class="description">{{ location.description }}</div>
-        <div class="description">Статус: {{ location.get_status_display }}</div>
-        <div class="description">Население: {{ location.get_population_display }}</div>
-        {% if location.glava %}
-        <div class="description" id='Глава локации'>Глава локации:<a href="{% url "npc_page" location.glava.slug %}">{{ location.glava }}</a></div>
-        {% endif %}
-        {% if location.Land %}
-            <p> Принадлежность: </p>
-            <div class="description">
-                <a href="{% url 'country_page'  location.Land.slug  %}"> {{ location.Land.name }}</a>
+                {% if location.capital %}
+                
+                <h2> Столица:
+                    <a href="{% url 'city_page' location.slug location.capital.slug %}">г. {{ location.capital.name }} </a>
+        
+                </h2>
+                {% endif %}
+                <h3>Описание:</h3>
+                <div class="description">{{ location.description }}</div>
+                <div class="description">Статус: {{ location.get_status_display }}</div>
+                <div class="description">Население: {{ location.get_population_display }}</div>
+                {% if location.glava %}
+                <div class="description" id='Глава локации'>Глава локации:<a href="{% url "npc_page" location.glava.slug %}">{{ location.glava }}</a></div>
+                {% endif %}
+                {% if location.Land %}
+                    <p> Принадлежность: </p>
+                    <div class="description">
+                        <a href="{% url 'country_page'  location.Land.slug  %}"> {{ location.Land.name }}</a>
+                    </div>
+                {% endif %}
+                {% if location.cities.all.exists %}
+                    <p>Города входящие в страну: {{ location.city_exists }}</p>
+                    {% for city in location.cities.all %}
+                    <div class="description">
+                        <a href="{% url 'city_page' location.slug  city.slug  %}">{{ city.name }}</a>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% if location.villages.all.exists %}
+                    <p>Деревни входящие в страну:</p>
+                    {% for village in location.villages.all %}
+                    <div class="description">
+                        <a href="{% url 'vilage_page' location.slug  village.slug  %}">Деревня {{ village.name }}</a>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% if location.npcs %}
+                <div class="cities">
+                    <h3>Связанные НПС:</h3>
+                    <ul>
+                        {% for npc in location.npcs.all %}
+                            <li><a href=" {% url 'npc_page' npc.slug %}">{{ npc.name }}</a></li>
+                        {% empty %}
+                            <li>Неизвестно</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                <div style="display: flex;justify-content: flex-end;">
+                    <a href="{% url 'index' %}">Вернуться на карту</a>
+                </div>
             </div>
-        {% endif %}
-        {% if location.cities.all.exists %}
-            <p>Города входящие в страну: {{ location.city_exists }}</p>
-            {% for city in location.cities.all %}
-            <div class="description">
-                <a href="{% url 'city_page' location.slug  city.slug  %}">{{ city.name }}</a>
-            </div>
-            {% endfor %}
-        {% endif %}
-        {% if location.villages.all.exists %}
-            <p>Деревни входящие в страну:</p>
-            {% for village in location.villages.all %}
-            <div class="description">
-                <a href="{% url 'vilage_page' location.slug  village.slug  %}">Деревня {{ village.name }}</a>
-            </div>
-            {% endfor %}
-        {% endif %}
-        {% if location.npcs %}
-        <div class="cities">
-            <h3>Связанные НПС:</h3>
-            <ul>
-                {% for npc in location.npcs.all %}
-                    <li><a href=" {% url 'npc_page' npc.slug %}">{{ npc.name }}</a></li>
-                {% empty %}
-                    <li>Неизвестно</li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
-        <div style="display: flex;justify-content: flex-end;">
-            <a href="{% url 'index' %}">Вернуться на карту</a>
         </div>
     </div>
 </body>
