@@ -1,23 +1,20 @@
-{// for django:
-
+{
+  "files.associations": {
+        "/*.html": "html",
+        "/templates/*/*.html": "django-html",
+        "/templates/*/*/*.html": "django-html",
+        "/templates/*": "django-html",
+        "/requirements{/,*}.{txt,in}": "pip-requirements"
+    },
     "emmet.includeLanguages": {
-        "django-html": "html"
+      "django-html": "html"
     },
-
-    "files.associations": {
-        "**/*.html": "html",
-        "**/templates/*/*.html": "django-html",
-        "**/templates/*/*/*.html": "django-html",
-        "**/templates/*": "django-html",
-        "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
     },
-
-    "[django-html]": {
-        "breadcrumbs.showClasses": true,
-        "editor.quickSuggestions": {
-            "other": true,
-            "comments": true,
-            "strings": true
-        }
-    }
-}
+    // "[django-html]": {
+    //   "editor.defaultFormatter": "esbenp.prettier-vscode" 
+    // }
+  }
