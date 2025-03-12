@@ -1,4 +1,6 @@
 let continents = document.querySelectorAll('.continent');
+let continentred = document.querySelectorAll('.continentred');
+let continentbl = document.querySelectorAll('.continentbl');
 let popupBg = document.querySelector('.info__bg');
 let popup__photo = document.querySelector('.info__photo');
 let popup__title = document.querySelector('.info__title');
@@ -6,17 +8,7 @@ let popup__text = document.querySelector('.info__text');
 let tooltip = document.querySelector('.tooltip');
 let more__info = document.querySelector('.info__link')
 
-continents.forEach((item) => {
-    item.addEventListener('click', function() {
-        popup__title.textContent = this.getAttribute('data-title');
-        popup__photo.setAttribute('src', this.getAttribute('data-photo'));
-        popup__text.textContent = this.getAttribute('data-description');
-        popupBg.classList.add('active');
-		more__info.setAttribute('href',this.getAttribute('more-info'))
-		more__info.textContent = 'Подробнее о ' + this.getAttribute('data-title') 
-    });
-
-    // item.addEventListener('mouseenter', function() {
+// item.addEventListener('mouseenter', function() {
     //     tooltip.textContent = item.getAttribute('data-title');
     //     tooltip.style.display = 'block';
     // });
@@ -30,7 +22,40 @@ continents.forEach((item) => {
     //     tooltip.style.top = (e.y + 20) + 'px';
     //     tooltip.style.left = (e.x + 20) + 'px';
     // });
+
+continents.forEach((item) => {
+    item.addEventListener('click', function() {
+        popup__title.textContent = this.getAttribute('data-title');
+        popup__photo.setAttribute('src', this.getAttribute('data-photo'));
+        popup__text.textContent = this.getAttribute('data-description');
+        popupBg.classList.add('active');
+		more__info.setAttribute('href',this.getAttribute('more-info'))
+		more__info.textContent = 'Подробнее о ' + this.getAttribute('data-title') 
+    });
 });
+
+continentred.forEach((item) => {
+    item.addEventListener('click', function() {
+        popup__title.textContent = this.getAttribute('data-title');
+        popup__photo.setAttribute('src', this.getAttribute('data-photo'));
+        popup__text.textContent = this.getAttribute('data-description');
+        popupBg.classList.add('active');
+		more__info.setAttribute('href',this.getAttribute('more-info'))
+		more__info.textContent = 'Подробнее о ' + this.getAttribute('data-title') 
+    });
+});
+
+continentbl.forEach((item) => {
+    item.addEventListener('click', function() {
+        popup__title.textContent = this.getAttribute('data-title');
+        popup__photo.setAttribute('src', this.getAttribute('data-photo'));
+        popup__text.textContent = this.getAttribute('data-description');
+        popupBg.classList.add('active');
+		more__info.setAttribute('href',this.getAttribute('more-info'))
+		more__info.textContent = 'Подробнее о ' + this.getAttribute('data-title') 
+    });
+});
+
 
 document.addEventListener('click', (e) => {
     if(e.target === popupBg) {

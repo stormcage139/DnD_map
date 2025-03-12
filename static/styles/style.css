@@ -61,12 +61,66 @@ img {
     animation: highliteContinent 2s linear infinite;
 }
 
+.continentred{
+  visibility: hidden;
+  fill: none;
+  stroke: rgb(0, 0, 0);
+  stroke-width: 3px;
+  cursor: pointer;
+  pointer-events: all;
+}
+.continentred:hover{
+  visibility: visible;
+}
+.continentred:hover{
+  animation: highliteContinentred 2s linear infinite;
+}
+
+.continentbl{
+  visibility: hidden;
+  fill: none;
+  stroke: rgb(0, 0, 0);
+  stroke-width: 3px;
+  cursor: pointer;
+  pointer-events: all;
+}
+.continentbl:hover{
+  visibility: visible;
+}
+.continentbl:hover{
+  animation: highliteContinentbl 2s linear infinite;
+}
+
+@keyframes highliteContinentred{
+  0%{
+      stroke: rgb(0, 0, 0);
+  }
+  50%{
+      stroke: rgb(223, 0, 0);
+  }
+  100%{
+      stroke: black   ;
+  }
+}
+
+@keyframes highliteContinentbl{
+  0%{
+      stroke: rgb(0, 0, 0);
+  }
+  50%{
+      stroke: rgb(0, 17, 255);
+  }
+  100%{
+      stroke: black   ;
+  }
+}
+
 @keyframes highliteContinent{
     0%{
         stroke: rgb(0, 0, 0);
     }
     50%{
-        stroke: rgb(250, 0, 0);
+        stroke: rgb(255, 255, 255);
     }
     100%{
         stroke: black   ;
