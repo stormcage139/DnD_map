@@ -14,7 +14,8 @@ class Location(models.Model):
             'Drou':"Дроу",
             'Goblins':"Гоблины",
             'Vampires':'Вампиры',
-            'Giffs':'Гифы'}
+            'Giffs':'Гифы',
+            'Forers_Elfs':'Лесные эльфы'}
     statuses ={
         "Unknown": "Неизвестен",
         "Martial_law": "Военное положение",
@@ -39,6 +40,7 @@ class Location(models.Model):
     def __str__(self):
         return self.name
     class Meta:
+        ordering = ["name"]
         verbose_name = "Абстрактная модель(не трогай)"
         verbose_name_plural = "Абстрактная модель(не трогай)"
     
