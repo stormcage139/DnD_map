@@ -1,60 +1,45 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Информация о герое</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            width: 800px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-        }
-        .description {
-            white-space: pre-wrap;
-            text-align: justify;
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 10px;
-            border: 1px solid #ccc;
-            background: #fafafa;
-        }
-        .cities {
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        {% comment %} <img src="{{ hero.image.url }}" alt=""> {% endcomment %}
-        <h1>{{ hero.first_name }} {{ hero.second_name }}</h1>
-        <h3>Описание:</h3>
-        <div class="description">{{ hero.description }}</div>
-        <div class="cities">
-            <h3>Посещённые города:</h3>
-            <ul>
-                {% for city in hero.visited_cities.all %}
-                    <li>{{ city.name }}</li>
-                {% empty %}
-                    <li>Герой пока не посетил ни одного города.</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div style="display: flex;justify-content: flex-end;">
-            <a href="{% url 'index' %}">Вернуться на карту</a>
+{% extends "map/base.html" %}
+    {% block mainsector %}
+    <div class="ramka">
+        <div class="between">
+            <div class="container">
+                <div style='display: flex;justify-content:flex-end'><button id="toggleFont">Переключить шрифт</button></div>
+                {% if hero.image %}
+                <img src="{{ hero.image.url }}" alt="" style="width: 100%; height: auto;">
+                {% endif %}
+                <h1>{{ hero.first_name }} {{ hero.second_name }}</h1>
+        
+                
+                <h3>Описание:</h3>
+                <div class="description">{{ hero.description }}</div>
+                <br>
+                <div class="cities">
+                    <h3>Посещённые города:</h3>
+                    <ul>
+                        {% for city in hero.visited_cities.all %}
+                            <li>{{ city.name }}</li>
+                        {% empty %}
+                            <li>Герой пока не посетил ни одного города.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="cities">
+                    <h3>Участие в приключениях:</h3>
+                    <ul>
+                        {% for adventure in hero.adventures.all %}
+                            <li>{{ adventure.name }}</li>
+                        {% empty %}
+                            <li>Герой пока не учавствовал в приключениях</li>
+                        {% endfor %}
+                    </ul>
+                </div>    
+                    
+                <div style="display: flex;justify-content: space-between;">
+                    <a  href="#" onclick="window.history.back()">←Назад</a>
+                    <a href="{% url 'index' %}">Вернуться на карту</a>
+                </div>
+                
+            </div>
         </div>
     </div>
-</body>
-</html>
+    {% endblock mainsector %}

@@ -1,107 +1,11 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Информация о герое</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-        body {
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            background-image: url({% static "images/svitok.png" %});
-            font-family: MyFont, sans-serif;
-            font-size: 1.4rem;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            background-size: cover;
-            object-fit: cover; 
-            width: 90%;
-            min-height: 90vh;
-            background-image: url({% static "images/zxczxc.png" %});
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 20px;
-        }
-        .container:hover {
-            transform: translateY(-10px);
-            transition: transform 0.5s ease, background-color 0.3s ease;
-        }
-        h1 {
-            text-align: center;
-            font-size: 2rem;
-        }
-        .description {
-            white-space: pre-wrap;
-            text-align: justify;
-            max-height: 450px;
-            overflow-y: auto;
-        }
-        .cities {
-            margin-top: 20px;
-        }
-        .ramka {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            width: 60%;
-        }
-        @font-face {
-            font-family: 'MyFont';
-            src: url({% static 'shrifts/1blackmoorletplain10.ttf' %});
-            font-weight: normal;
-            font-style: normal;
-        }
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            .container {
-                width: 100%;
-                padding: 15px;
-            }
-            h1 {
-                font-size: 1.5rem;
-            }
-            .description {
-                max-height: 300px;
-            }
-        }
-        @media (max-width: 480px) {
-            body {
-                padding: 5px;
-            }
-            .container {
-                padding: 10px;
-            }
-            h1 {
-                font-size: 1.2rem;
-            }
-            .description {
-                max-height: 200px;
-            }
-        }
-        .normal-font {
-            font-family: Montserrat !important; /* Обычный шрифт */
-            font-style: normal;
-            font-weight: 100 1100;
-        }
-    </style>
-</head>
-<body>
+
+{% extends "map/base.html" %}
+{% block page_name %}  Информация о {{location.name}} {% endblock page_name %}
+{% block mainsector %}
     <div class="ramka">
         <div class="between">
             <div class="container">
-                <div style='display: flex;justify-content:flex-end'><button id="toggleFont">Переключить шрифт</button></div>
+                <div style='display: flex;justify-content:flex-end'><button class='toggleFont-btn' id="toggleFont">Переключить шрифт</button></div>
                 <img src="{{ hero.image.url }}" alt="" style="width: 100%; height: auto;">
                 {% if location.capital %}
                     <h1>Страна {{ location.name }}</h1>
@@ -117,9 +21,7 @@
                 </h2>
                 {% endif %}
                 <h3>Описание:</h3>
-                <div class="description">{{ location.description }}</div>
-                <br>
-                <br>
+                <div class="description">{{ location.description|safe }}</div>
                 <div class="description"><b>Статус:</b> {{ location.get_status_display }}</div>
                 <div class="description"><b>Население:</b> {{ location.get_population_display }}</div>
                 {% if location.glava %}
@@ -178,28 +80,7 @@
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const body = document.body;
-            const button = document.getElementById("toggleFont");
-        
-            // Проверяем сохранённое значение в localStorage
-            if (localStorage.getItem("font") === "normal") {
-                body.classList.add("normal-font");
-            }
-        
-            // Обработчик нажатия на кнопку
-            button.addEventListener("click", function() {
-                body.classList.toggle("normal-font");
-                
-                // Сохраняем выбор пользователя
-                if (body.classList.contains("normal-font")) {
-                    localStorage.setItem("font", "normal");
-                } else {
-                    localStorage.setItem("font", "gothic");
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+    {% endblock mainsector %}
+    {% block scriptbody %}    
+       
+    {% endblock scriptbody %}

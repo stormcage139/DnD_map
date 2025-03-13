@@ -6,6 +6,14 @@
         .sidebar{
             background-image: url({% static "images/kawai.png" %});
         }
+        .img-a{
+            border: none !important;
+            padding:0 !important;
+            text-decoration: none !important;
+            color:#000000 !important;
+            background:none !important;
+            border:none !important;
+        }
     </style>
 
     <meta charset="UTF-8">
@@ -63,10 +71,10 @@
                 {% endif %}
                 <div style="display: flex;position: relative;">
                     <div>
-                        <li><img style="height: 200px;" src="{% static 'images/LStSh.png'%}" alt=""></li>
+                        <li><a class="img-a" href="https://longstoryshort.app/characters/list/"><img style="height: 200px;" src="{% static 'images/LStSh.png'%}" alt=""></a></li>
                     </div>
                     <div style="position: absolute;top: 50px;left: 190px;">
-                        <li><img style="height: 100px;" src="{% static 'images/DnD.png'%}" alt=""></li>
+                        <li><a class="img-a" href="https://dnd.su/"><img style="height: 100px;" src="{% static 'images/DnD.png'%}" alt=""></a></li>
                     </div>
                 </div>
             </ul>

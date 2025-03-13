@@ -118,14 +118,15 @@ class Visit(models.Model):
 
 class Dnd_adventure(models.Model):
     name = models.CharField(max_length=100,verbose_name='Название приключения')
-    number = models.IntegerField(verbose_name='Номер приключения')
+    number = models.DecimalField(verbose_name='Номер приключения',blank=True,null=True,max_digits=1000,decimal_places=1)
     description = models.TextField(verbose_name='Описание приключения')
     heroes = models.ManyToManyField(to=Hero_m,blank=True,verbose_name='Учавствовашие герои')
     npcs = models.ManyToManyField(to=NPC,blank=True,verbose_name='Учавствовавшие NPCи')
     def __str__(self):
-        return self.name
+        return str(self.number) + ' ' + self.name
+
     class Meta:
-        ordering=['name']
+        ordering=['number']
         verbose_name = "Приключение"
         verbose_name_plural = "Приключения"
     

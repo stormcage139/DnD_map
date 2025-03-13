@@ -1,62 +1,31 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Информация о NPC</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            width: 800px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-        }
-        .description {
-            white-space: pre-wrap;
-            text-align: justify;
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 10px;
-            border: 1px solid #ccc;
-            background: #fafafa;
-        }
-        .cities {
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        {% if npc.image %}
-        <img src="{{ npc.image.url }}" alt="">
-        {% endif %}
-        <h1>{{ npc.name }}</h1>
-        <h3>Описание:</h3>
-        <div class="description">{{ npc.description }}</div>
-        <div class="cities">
-            <h3>Участие в приключениях:</h3>
-            <ul>
-                {% for adventure in npc.adventures.all %}
-                    <li>{{ adventure.name }}</li>
-                {% empty %}
-                    <li>NPC пока не учавствовал в приключениях</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div style="display: flex;justify-content: flex-end;">
-            <a href="{% url 'index' %}">Вернуться на карту</a>
+{% extends "map/base.html" %}
+    {% block mainsector %}
+    <div class="ramka">
+        <div class="between">
+            <div class="container">
+                <div style='display: flex;justify-content:flex-end'><button class='toggleFont-btn' id="toggleFont">Переключить шрифт</button></div>
+                {% if npc.image %}
+                <img src="{{ npc.image.url }}" alt="">
+                {% endif %}
+                <h1>{{ npc.name }}</h1>
+                <h3>Описание:</h3>
+                <div class="description">{{ npc.description }}</div>
+                <div class="cities">
+                    <h3>Участие в приключениях:</h3>
+                    <ul>
+                        {% for adventure in npc.adventures.all %}
+                            <li>{{ adventure.name }}</li>
+                        {% empty %}
+                            <li>NPC пока не учавствовал в приключениях</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div style="display: flex;justify-content: flex-end;">
+                    <a href="{% url 'index' %}">Вернуться на карту</a>
+                </div>
+            </div>  
         </div>
     </div>
-</body>
-</html>
+    {% endblock mainsector %}
+
+<body>
