@@ -12,6 +12,8 @@ def index(request):
     context = {}
     for country in Country.objects.all():
         context[country.slug] = country
+    for city in City.objects.all():
+        context[city.slug] = city
     context['heroes'] = Hero_m.objects.all()
 
     # harinsford = Country.objects.get(slug='harinsford')
