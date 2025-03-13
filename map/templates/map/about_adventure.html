@@ -1,0 +1,40 @@
+{% extends "map/base.html" %}
+    {% block mainsector %}
+    <div class="ramka">
+        <div class="between">
+            <div class="container">
+                <div style='display: flex;justify-content:flex-end'><button class='toggleFont-btn' id="toggleFont">Переключить шрифт</button></div>
+                {% if adventure.image %}
+                <img src="{{ adventure.image.url }}" alt="">
+                {% endif %}
+                <h1>{{ adventure.name }}</h1>
+                <h3>Описание:</h3>
+                <div class="description">{{ adventure.description }}</div>
+                <div class="cities">
+                    <h3>Герои,учавствовавшие в приключении</h3>
+                    <ul>
+                        {% for hero in adventure.heroes.all %}
+                            <li>{{ hero.name }}</li>
+                        {% empty %}
+                            <li>Не один герой не учавствовал в приключении</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="cities">
+                    <h3>NPC,учавствовавшие в приключении</h3>
+                    <ul>
+                        {% for npc in adventure.npcs.all %}
+                            <li>{{ npc.name }}</li>
+                        {% empty %}
+                            <li>Не один герой не учавствовал в приключении</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div style="display: flex;justify-content: flex-end;">
+                    <a href="{% url 'index' %}">Вернуться на карту</a>
+                </div>
+            </div>  
+        </div>
+    </div>
+    {% endblock mainsector %}
+

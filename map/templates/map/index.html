@@ -62,7 +62,15 @@
                     {% endfor %}
                 </ul>
 	            </li>
-	            <li><a href="#"><b>Клиентам</b></a></li>
+	            <li class="menu-parent-item"><a href="#"><b>Приключения</b><i></i></a>
+                    <ul class="sub-menu">
+                        {% for adventure in adventures %}
+                        {% if adventure.slug %}
+                            <li><a href="{% url 'adventure_page' adventure.slug %}"><b>{{ adventure.name }}</b></a></li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                    </li>
 	            <li><a href="#"><b>Контакты</b></a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url "logout" %}"><b>Выйти из аккаунта {{ user.username }}</b></a></li>

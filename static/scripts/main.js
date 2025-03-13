@@ -8,6 +8,14 @@ let popup__text = document.querySelector('.info__text');
 let tooltip = document.querySelector('.tooltip');
 let more__info = document.querySelector('.info__link')
 
+function truncateDescription(description, maxSentences = 3) {
+    let sentences = description.split(".");
+    if (sentences.length > maxSentences) {
+        return sentences.slice(0, maxSentences).join(".") + "....";
+    }
+    return description;
+}
+
 // item.addEventListener('mouseenter', function() {
     //     tooltip.textContent = item.getAttribute('data-title');
     //     tooltip.style.display = 'block';
@@ -27,7 +35,7 @@ continents.forEach((item) => {
     item.addEventListener('click', function() {
         popup__title.textContent = this.getAttribute('data-title');
         popup__photo.setAttribute('src', this.getAttribute('data-photo'));
-        popup__text.textContent = this.getAttribute('data-description');
+        popup__text.textContent = truncateDescription(this.getAttribute('data-description'));
         popupBg.classList.add('active');
 		more__info.setAttribute('href',this.getAttribute('more-info'))
 		more__info.textContent = 'Подробнее о ' + this.getAttribute('data-title') 
@@ -38,7 +46,7 @@ continentred.forEach((item) => {
     item.addEventListener('click', function() {
         popup__title.textContent = this.getAttribute('data-title');
         popup__photo.setAttribute('src', this.getAttribute('data-photo'));
-        popup__text.textContent = this.getAttribute('data-description');
+        popup__text.textContent = truncateDescription(this.getAttribute('data-description'));
         popupBg.classList.add('active');
 		more__info.setAttribute('href',this.getAttribute('more-info'))
 		more__info.textContent = 'Подробнее о ' + this.getAttribute('data-title') 
@@ -49,7 +57,7 @@ continentbl.forEach((item) => {
     item.addEventListener('click', function() {
         popup__title.textContent = this.getAttribute('data-title');
         popup__photo.setAttribute('src', this.getAttribute('data-photo'));
-        popup__text.textContent = this.getAttribute('data-description');
+        popup__text.textContent = truncateDescription(this.getAttribute('data-description'));
         popupBg.classList.add('active');
 		more__info.setAttribute('href',this.getAttribute('more-info'))
 		more__info.textContent = 'Подробнее о ' + this.getAttribute('data-title') 
@@ -103,4 +111,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	for( i=0; i < sidebarAccordeon.length; i++ ){
 		sidebarAccordeon[i].addEventListener('click', accordeonFunction, false);
 	}
+	
 });

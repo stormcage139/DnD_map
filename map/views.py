@@ -3,7 +3,7 @@ from tkinter import NO
 from urllib.request import HTTPRedirectHandler
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from map.models import Location,Country,City,Vilage,Hero_m
+from map.models import Location,Country,City,Vilage,Hero_m, Dnd_adventure
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -15,34 +15,7 @@ def index(request):
     for city in City.objects.all():
         context[city.slug] = city
     context['heroes'] = Hero_m.objects.all()
-
-    # harinsford = Country.objects.get(slug='harinsford')
-    # cantov_hills = Country.objects.get(slug='cantov_hills')
-    # edliada_forest = Country.objects.get(slug='edliada_forest')
-    # helmogros = Country.objects.get(slug='helmogros')
-    # flaoorn = Country.objects.get(slug='flaoorn')
-    # alftand = Country.objects.get(slug='alftand')
-    # vampire_lands = Country.objects.get(slug='vampire_lands')
-    # vruveriat = Country.objects.get(slug='vruveriat')
-    # gornor = Country.objects.get(slug='gornor')
-    # delackort = Country.objects.get(slug='delackort')
-    # harinsford = Country.objects.get(slug='harinsford')
-    # harinsford = Country.objects.get(slug='harinsford')
-    # harinsford = Country.objects.get(slug='harinsford')
-    # context = {'harinsford':harinsford,
-    #            'cantov_hills':cantov_hills,
-    #            'edliada_forest':edliada_forest,
-    #            'helmogros': helmogros,
-    #            'flaoorn':   flaoorn,
-    #         #    отсуда добавлять
-    #            'alftand':alftand,
-    #            'vampire_lands':vampire_lands,
-    #            'vruveriat' :vruveriat,
-    #            'gornor':gornor,
-    #            'delackort':delackort,
-    #            'harinsford':harinsford,
-    #            'heroes': Hero_m.objects.all()}
-    
+    context['adventures'] = Dnd_adventure.objects.all() 
     return render(request,'map/index.html',context=context)    
 
 

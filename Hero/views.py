@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from map.models import Hero_m,NPC
+from map.models import Hero_m,NPC, Dnd_adventure
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
@@ -21,6 +21,10 @@ def login_page(request):
             return HttpResponseRedirect('/')
     return render(request,'Hero/login.html')
 
+def about_adventure_page(request,adventure_slug):
+    adventure = Dnd_adventure.objects.get(slug=adventure_slug)
+    context ={'adventure':adventure}
+    return render(request,'map/about_adventure.html',context=context)
 
 def user_logout(request):
     logout(request)

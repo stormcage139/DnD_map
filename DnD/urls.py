@@ -18,13 +18,14 @@ from django.contrib import admin
 from django.urls import path
 from map.admin import Country
 from map.views import index, about_Country, about_City_or_Village
-from Hero.views import about_hero_page, about_npc_page,login_page, user_logout
+from Hero.views import about_hero_page, about_npc_page,login_page, user_logout, about_adventure_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index,name='index'),
     path('login/', login_page,name='login_page'),
     path('logout/', user_logout,name='logout'),
+    path('adventure/<slug:adventure_slug>', about_adventure_page,name='adventure_page'),
     path('hero/<slug:hero_slug>/',about_hero_page,name='hero_page'),
     path('npc/<slug:npc_slug>/',about_npc_page,name='npc_page'),
     path('location_info/<slug:country_slug>/',about_Country,name='country_page'),
