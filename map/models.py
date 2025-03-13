@@ -112,8 +112,8 @@ class Visit(models.Model):
     def __str__(self):
         return 'Посещение ' + self.city.name + ' Героем ' + self.hero.username
     class Meta:
-        verbose_name = "Посещение(пока не трогай)"
-        verbose_name_plural = "Песещения(пока не трогай)"
+        verbose_name = "Посещение"
+        verbose_name_plural = "Песещения"
     
 
 class Dnd_adventure(models.Model):
