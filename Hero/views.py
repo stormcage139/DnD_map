@@ -1,11 +1,22 @@
 from django.shortcuts import render, HttpResponseRedirect
-from map.models import Hero_m,NPC, Dnd_adventure
+from map.models import Hero_m,NPC, Dnd_adventure,City,Vilage,Country
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 def about_hero_page(request,hero_slug):
     user = Hero_m.objects.get(slug=hero_slug)
-    context = {'hero': user}
+    slugs = set([i.slug for i in user.visited_cities.all()])
+    cities = City.objects.filter(slug__in=slugs)
+    countries = Country.objects.filter(slug__in=slugs)
+    villages = Vilage.objects.filter(slug__in=slugs)
+    advenures = Dnd_adventure.objects.filter(heroes=user)
+    context = {'hero': user,
+               'villages':villages,
+               'countries':countries,
+               'cities':cities,
+               'advenures':advenures,
+               }
+    
     return render(request,'Hero/about_hero.html',context=context)
 
 def about_npc_page(request,npc_slug):

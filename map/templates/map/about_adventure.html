@@ -3,7 +3,7 @@
     <div class="ramka">
         <div class="between">
             <div class="container">
-                <div style='display: flex;justify-content:flex-end'><button class='toggleFont-btn' id="toggleFont">Переключить шрифт</button></div>
+                <div style='display: flex;justify-content:flex-end'><button class='fantasy-btn-3xl fantasy-bone-n-coper' id="toggleFont"><span  contenteditable="plaintext-only" style="cursor: text;">Переключить шрифт</span></button></div>
                 {% if adventure.image %}
                 <img src="{{ adventure.image.url }}" alt="">
                 {% endif %}
@@ -14,7 +14,7 @@
                     <h3>Герои,учавствовавшие в приключении</h3>
                     <ul>
                         {% for hero in adventure.heroes.all %}
-                            <li>{{ hero.name }}</li>
+                            <li><a href="{% url "hero_page" hero.slug %}">{{ hero.first_name }}</a></li>
                         {% empty %}
                             <li>Не один герой не учавствовал в приключении</li>
                         {% endfor %}
@@ -24,7 +24,7 @@
                     <h3>NPC,учавствовавшие в приключении</h3>
                     <ul>
                         {% for npc in adventure.npcs.all %}
-                            <li>{{ npc.name }}</li>
+                            <li><a href="{% url "npc_page" npc.slug %}">{{ npc.name }}</a></li>
                         {% empty %}
                             <li>Не один герой не учавствовал в приключении</li>
                         {% endfor %}

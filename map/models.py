@@ -81,7 +81,7 @@ class Hero_m(AbstractUser):
     visited_cities = models.ManyToManyField(Location, through="Visit",blank=True)
     description = models.TextField(blank=True)
     slug = models.SlugField(max_length=60,unique=True)
-    adventures = models.ManyToManyField("map.Dnd_adventure", verbose_name=("adventures"),blank=True)
+    # adventures = models.ManyToManyField("map.Dnd_adventure", verbose_name=("adventures"),blank=True)
     
     def __str__(self):
         return self.username

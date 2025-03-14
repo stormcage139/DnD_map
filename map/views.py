@@ -14,6 +14,8 @@ def index(request):
         context[country.slug] = country
     for city in City.objects.all():
         context[city.slug] = city
+    for village in Vilage.objects.all():
+        context[village.slug] = village
     context['heroes'] = Hero_m.objects.all()
     context['adventures'] = Dnd_adventure.objects.all() 
     return render(request,'map/index.html',context=context)    
@@ -39,7 +41,7 @@ def about_Country(request,country_slug):
 
 
 @login_required
-def about_City_or_Village(request,country_slug,city_or_village_slug):
+def about_City_or_Village(request,city_or_village_slug):
     try:
         city_or_village_variable = City.objects.filter(slug=city_or_village_slug)
         if city_or_village_variable.exists():

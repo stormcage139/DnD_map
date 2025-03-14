@@ -5,19 +5,19 @@
     <div class="ramka">
         <div class="between">
             <div class="container">
-                <div style='display: flex;justify-content:flex-end'><button class='fantasy-btn-3xl fantasy-bone-n-coper' id="toggleFont"><span contenteditable="plaintext-only" style="cursor: text;">Переключить шрифт</span></button></div>
+                <div style='display: flex;justify-content:flex-end'><button class='fantasy-btn-3xl fantasy-bone-n-coper' id="toggleFont"><span  contenteditable="plaintext-only" style="cursor: text;">Переключить шрифт</span></button></div>
                 <img src="{{ hero.image.url }}" alt="" style="width: 100%; height: auto;">
                 {% if location.capital %}
                     <h1>Страна {{ location.name }}</h1>
                 {% elif location.is_city == True  %}
-                    <h1>Город {{ location.name }}</h1>
+                    <h1>{{ location.name }}</h1>
                 {% else %}
                     <h1>Поселение {{ location.name }}</h1>
                 {% endif %}
         
                 {% if location.capital %}
                 <h2> Столица:
-                    <a href="{% url 'city_page' location.slug location.capital.slug %}">г. {{ location.capital.name }} </a>
+                    <a href="{% url 'city_page' location.capital.slug %}">г. {{ location.capital.name }} </a>
                 </h2>
                 {% endif %}
                 <h3>Описание:</h3>
@@ -37,7 +37,7 @@
                     <p><b>Города входящие в страну:</b> {{ location.city_exists }}</p>
                     {% for city in location.cities.all %}
                     <div class="description">
-                        <a href="{% url 'city_page' location.slug  city.slug  %}">{{ city.name }}</a>
+                        <a href="{% url 'city_page' city.slug  %}">{{ city.name }}</a>
                     </div>
                     {% endfor %}
                 {% endif %}
@@ -45,7 +45,7 @@
                     <p><b>Деревни входящие в страну:</b></p>
                     {% for village in location.villages.all %}
                     <div class="description">
-                        <a href="{% url 'city_page' location.slug  village.slug  %}">Деревня {{ village.name }}</a>
+                        <a href="{% url 'city_page' village.slug  %}">{{ village.name }}</a>
                     </div>
                     {% endfor %}
                 {% endif %}

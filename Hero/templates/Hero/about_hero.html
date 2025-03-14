@@ -3,7 +3,7 @@
     <div class="ramka">
         <div class="between">
             <div class="container">
-                <div style='display: flex;justify-content:flex-end'><button id="toggleFont">Переключить шрифт</button></div>
+                <div style='display: flex;justify-content:flex-end'><button class='fantasy-btn-3xl fantasy-bone-n-coper' id="toggleFont"><span  contenteditable="plaintext-only" style="cursor: text;">Переключить шрифт</span></button></div>
                 {% if hero.image %}
                 <img src="{{ hero.image.url }}" alt="" style="width: 100%; height: auto;">
                 {% endif %}
@@ -14,11 +14,30 @@
                 <div class="description">{{ hero.description }}</div>
                 <br>
                 <div class="cities">
+                    <h3>Посещённые Страны:</h3>
+                    <ul>
+                        {% for country in countries %}
+                            <li><a href="{% url "country_page" country.slug %}">{{ country.name }}</a></li>
+                        {% empty %}
+                            <li>Герой пока не посетил ни одного города.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="cities">
                     <h3>Посещённые города:</h3>
                     <ul>
-                        {% for city in hero.visited_cities.all %}
-                        {{ city.Land.name }}
-                            {% comment %} <li><a href="{% url "city_page" city.Land.slug city.slug %}">{{ city.name }}</a></li> {% endcomment %}
+                        {% for city in cities %}
+                            <li><a href="{% url "city_page" city.slug %}">{{ city.name }}</a></li>
+                        {% empty %}
+                            <li>Герой пока не посетил ни одного города.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="cities">
+                    <h3>Посещённые Дервени:</h3>
+                    <ul>
+                        {% for village in villages %}
+                            <li><a href="{% url "city_page" village.slug %}">{{ village.name }}</a></li>
                         {% empty %}
                             <li>Герой пока не посетил ни одного города.</li>
                         {% endfor %}
@@ -27,7 +46,7 @@
                 <div class="cities">
                     <h3>Участие в приключениях:</h3>
                     <ul>
-                        {% for adventure in hero.adventures.all %}
+                        {% for adventure in advenures %}
                             <li><a href="{% url "adventure_page" adventure.slug %}">{{ adventure.name }}</a></li>
                         {% empty %}
                             <li>Герой пока не учавствовал в приключениях</li>

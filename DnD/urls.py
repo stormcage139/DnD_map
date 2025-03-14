@@ -28,7 +28,7 @@ urlpatterns = [
     path('adventure/<slug:adventure_slug>', about_adventure_page,name='adventure_page'),
     path('hero/<slug:hero_slug>/',about_hero_page,name='hero_page'),
     path('npc/<slug:npc_slug>/',about_npc_page,name='npc_page'),
-    path('location_info/<slug:country_slug>/',about_Country,name='country_page'),
-    path('location_info/<slug:country_slug>/<slug:city_or_village_slug>',about_City_or_Village,name='city_page'),
+    path('location_info/country/<slug:country_slug>/',about_Country,name='country_page'),
+    path('location_info/city-or-village/<slug:city_or_village_slug>',about_City_or_Village,name='city_page'),
     # path('location_info/<slug:country_slug>/<slug:vilage_slug>',about_village,name='vilage_page'),
 ]
