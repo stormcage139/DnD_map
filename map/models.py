@@ -84,7 +84,7 @@ class Hero_m(AbstractUser):
     # adventures = models.ManyToManyField("map.Dnd_adventure", verbose_name=("adventures"),blank=True)
     
     def __str__(self):
-        return self.username
+        return self.first_name
     
     class Meta:
         db_table = "Heroes_table"
@@ -110,7 +110,7 @@ class Visit(models.Model):
     visited_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return 'Посещение ' + self.city.name + ' Героем ' + self.hero.username
+        return 'Посещение ' + self.city.name + ' Героем ' + self.hero.first_name
     class Meta:
         verbose_name = "Посещение"
         verbose_name_plural = "Песещения"

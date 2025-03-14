@@ -28,9 +28,8 @@
                 <div class="description" id='Глава локации'><b>Глава локации:</b><a href="{% url "npc_page" location.glava.slug %}">{{ location.glava }}</a></div>
                 {% endif %}
                 {% if location.Land %}
-                    <p> Принадлежность: </p>
                     <div class="description">
-                        <a href="{% url 'country_page'  location.Land.slug  %}"> {{ location.Land.name }}</a>
+                        <b>Принадлежность:</b><a href="{% url 'country_page'  location.Land.slug  %}"> {{ location.Land.name }}</a>
                     </div>
                 {% endif %}
                 {% if location.cities.all.exists %}
