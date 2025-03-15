@@ -28,28 +28,32 @@ def about_Country(request,country_slug):
     context = {'location': country}
     # print(country)
     if not request.user.is_superuser:
-        try:
-            was_here_or_not = hero.what_visits.get(city__slug=country_slug)
-        except Exception:
-            was_here_or_not = None
-        if was_here_or_not != None:
-            return render(request,'map/about_location.html',context=context)
-        else:
+        was_here_or_not = hero.what_visits.filter(city__slug=country_slug)
+        if not was_here_or_not.exists():
             return HttpResponse("<h1>У вас не доступа к информации об этой локации</h1>")
+        return render(request,'map/about_location.html',context=context)
     else:
        return render(request,'map/about_location.html',context=context)
 
 
 @login_required
 def about_City_or_Village(request,city_or_village_slug):
-    try:
-        city_or_village_variable = City.objects.filter(slug=city_or_village_slug)
-        if city_or_village_variable.exists():
-            city_or_village_variable = city_or_village_variable.get()
+    hero = Hero_m.objects.get(username=request.user.username)
+    city_or_village_variable = City.objects.filter(slug=city_or_village_slug)
+    if city_or_village_variable.exists():
+        city_or_village_variable = city_or_village_variable.get()
+    else:
+        city_or_village_variable = Vilage.objects.filter(slug=city_or_village_slug).get()
+        if not request.user.is_superuser:
+            was_here_or_not = hero.what_visits.filter(city__slug=city_or_village_variable.slug)
+            if not was_here_or_not.exists():
+                return HttpResponse("<h1>У вас не доступа к информации об этой локации</h1>")
+            else:
+                context = {'location': city_or_village_variable}   
+                return render(request,'map/about_location.html',context=context)
         else:
-            city_or_village_variable = Vilage.objects.filter(slug=city_or_village_slug).get()
-    except Exception:
-        city_or_village_variable = None
+            context = {'location': city_or_village_variable}   
+            return render(request,'map/about_location.html',context=context)
     context = {'location': city_or_village_variable}
     return render(request,'map/about_location.html',context=context)
 

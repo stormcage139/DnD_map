@@ -1,3 +1,5 @@
+from cgitb import small
+from re import T
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -30,6 +32,7 @@ class Location(models.Model):
     }
     image = models.ImageField(upload_to='location_picks/',null=True,blank=True)
     name = models.CharField(max_length=60)
+    small_description = models.TextField(blank=True,null=True,verbose_name='Маленькое описание для карточки Без гиперссылок')
     description = models.TextField()
     slug = models.SlugField(max_length=60,unique=True)
     status = models.CharField(max_length=50,null=True,choices=statuses)

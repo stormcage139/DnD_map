@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from map.admin import Country
 from map.views import index, about_Country, about_City_or_Village
 from Hero.views import about_hero_page, about_npc_page,login_page, user_logout, about_adventure_page
@@ -31,4 +33,4 @@ urlpatterns = [
     path('location_info/country/<slug:country_slug>/',about_Country,name='country_page'),
     path('location_info/city-or-village/<slug:city_or_village_slug>',about_City_or_Village,name='city_page'),
     # path('location_info/<slug:country_slug>/<slug:vilage_slug>',about_village,name='vilage_page'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
