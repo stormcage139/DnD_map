@@ -8,7 +8,7 @@
                 <div style='display: flex;justify-content:flex-end'><button class='fantasy-btn-3xl fantasy-bone-n-coper' id="toggleFont"><span  contenteditable="plaintext-only" style="cursor: text;">Переключить шрифт</span></button></div>
                 <img src="{{ hero.image.url }}" alt="" style="width: 100%; height: auto;">
                 {% if location.capital %}
-                    <h1>Страна {{ location.name }}</h1>
+                    <h1>{{ location.name }}</h1>
                 {% elif location.is_city == True  %}
                     <h1>{{ location.name }}</h1>
                 {% else %}
@@ -25,7 +25,7 @@
                 <div class="description"><b>Статус:</b> {{ location.get_status_display }}</div>
                 <div class="description"><b>Население:</b> {{ location.get_population_display }}</div>
                 {% if location.glava %}
-                <div class="description" id='Глава локации'><b>Глава локации:</b><a href="{% url "npc_page" location.glava.slug %}">{{ location.glava }}</a></div>
+                <div class="description" id='Глава локации'><b>Глава локации: </b><a href="{% url "npc_page" location.glava.slug %}">{{ location.glava }}</a></div>
                 {% endif %}
                 {% if location.Land %}
                     <div class="description">
@@ -65,7 +65,7 @@
                     <h3>Связанные Приключения:</h3>
                     <ul>
                         {% for adventure in location.what_adventures.all %}
-                            <li><a href="#">{{ adventure.name }}</a></li>
+                            <li><a href="{% url 'adventure_page' adventure.slug %}">{{ adventure.name }}</a></li>
                         {% empty %}
                             <li>Отстутствуют</li>
                         {% endfor %}

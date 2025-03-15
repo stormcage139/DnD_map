@@ -21,7 +21,9 @@ def about_hero_page(request,hero_slug):
 
 def about_npc_page(request,npc_slug):
     current_npc = NPC.objects.get(slug=npc_slug)
-    context = {'npc': current_npc}
+    advenures = Dnd_adventure.objects.filter(npcs=current_npc)
+    context = {'npc': current_npc,
+               'advenures':advenures}
     return render(request,'Hero/about_npc.html',context=context)
 
 def login_page(request):
