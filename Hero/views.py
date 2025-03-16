@@ -1,3 +1,6 @@
+from re import T
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render, HttpResponseRedirect
 from map.models import Hero_m,NPC, Dnd_adventure,City,Vilage,Country
 from django.contrib.auth import authenticate, login, logout
@@ -19,12 +22,24 @@ def about_hero_page(request,hero_slug):
     
     return render(request,'Hero/about_hero.html',context=context)
 
+@login_required
 def about_npc_page(request,npc_slug):
+    hero = Hero_m.objects.get(username=request.user.username)
     current_npc = NPC.objects.get(slug=npc_slug)
     advenures = Dnd_adventure.objects.filter(npcs=current_npc)
-    context = {'npc': current_npc,
-               'advenures':advenures}
-    return render(request,'Hero/about_npc.html',context=context)
+    flag = False
+    if request.user.know_npc.filter(slug=npc_slug).exists():
+        flag = True
+    else:
+        flag = False
+    if request.user.is_superuser or flag:
+        context = {
+                'npc': current_npc,
+                'advenures':advenures
+                }
+        return render(request,'Hero/about_npc.html',context=context)
+    else:
+        return HttpResponse("<h1>У вас не доступа к информации об этом NPC</h1>")
 
 def login_page(request):
     if request.method == 'POST':

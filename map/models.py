@@ -35,8 +35,8 @@ class Location(models.Model):
     small_description = models.TextField(blank=True,null=True,verbose_name='Маленькое описание для карточки Без гиперссылок')
     description = models.TextField()
     slug = models.SlugField(max_length=60,unique=True)
-    status = models.CharField(max_length=50,null=True,choices=statuses)
-    population = models.CharField(max_length=50,null=True,choices=race)
+    status = models.CharField(max_length=50,null=True,choices=statuses,blank=True)
+    population = models.CharField(max_length=50,null=True,choices=race,blank=True)
     npcs = models.ManyToManyField("map.NPC", verbose_name="Ключевые NPC",blank=True)
     what_adventures = models.ManyToManyField("map.Dnd_adventure", verbose_name="В каких приключениях принимал участие",blank=True)
 
@@ -58,7 +58,7 @@ class Country(Location):
     
 class Vilage(Location):
     glava = models.OneToOneField("map.NPC", verbose_name=("Представитель"), on_delete=models.SET_NULL,null=True,blank=True,default='Неизвестно')
-    Land = models.ForeignKey(to=Country,on_delete=models.SET_NULL,null=True,related_name="villages")
+    Land = models.ForeignKey(to=Country,on_delete=models.SET_NULL,null=True,related_name="villages",blank=True)
     class Meta:
         verbose_name = "Деревня"
         verbose_name_plural = "Деревни"
@@ -84,6 +84,7 @@ class Hero_m(AbstractUser):
     visited_cities = models.ManyToManyField(Location, through="Visit",blank=True)
     description = models.TextField(blank=True)
     slug = models.SlugField(max_length=60,unique=True)
+    know_npc = models.ManyToManyField("map.NPC", verbose_name=("Каких нпс знает"))
     # adventures = models.ManyToManyField("map.Dnd_adventure", verbose_name=("adventures"),blank=True)
     
     def __str__(self):

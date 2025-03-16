@@ -29,7 +29,7 @@ ALLOWED_HOSTS = ['*']
 
 LOGIN_URL = 'login_page'
 
-CSRF_TRUSTED_ORIGINS = ['https://dnd-map.cloudpub.ru']
+CSRF_TRUSTED_ORIGINS = ['https://dnd-map.cloudpub.ru','https://user302095580-n2owygu6.tunnel.vk-apps.com']
 # Application definition
 
 INSTALLED_APPS = [

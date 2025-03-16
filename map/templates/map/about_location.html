@@ -6,15 +6,15 @@
         <div class="between">
             <div class="container">
                 <div style='display: flex;justify-content:flex-end'><button class='fantasy-btn-3xl fantasy-bone-n-coper' id="toggleFont"><span  contenteditable="plaintext-only" style="cursor: text;">Переключить шрифт</span></button></div>
-                <img src="{{ hero.image.url }}" alt="" style="width: 100%; height: auto;">
+                
                 {% if location.capital %}
                     <h1>{{ location.name }}</h1>
                 {% elif location.is_city == True  %}
                     <h1>{{ location.name }}</h1>
                 {% else %}
-                    <h1>Поселение {{ location.name }}</h1>
+                    <h1>{{ location.name }}</h1>
                 {% endif %}
-        
+                <div style="display: flex;justify-content: center;"><img src="{% if location.image %} {{ location.image.url }} {% endif %}" alt="Сафрон пытается добыть изображения,скоро они будут доступны" style="width: 400px; height: 500px;border: 1px solid;border-radius: 1rem;text-align: center;"></div>
                 {% if location.capital %}
                 <h2> Столица:
                     <a href="{% url 'city_page' location.capital.slug %}">г. {{ location.capital.name }} </a>
