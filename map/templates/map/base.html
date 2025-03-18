@@ -521,9 +521,20 @@
     </style>
 </head>
 <body>
-    {% block mainsector %}
+  <div class="ramka">
+    <div class="between">
+        <div class="container">
+          <div style='display: flex;justify-content:flex-end'><button class='fantasy-btn-3xl fantasy-bone-n-coper' id="toggleFont"><span  contenteditable="plaintext-only" style="cursor: text;">Переключить шрифт</span></button></div>
+          {% block mainsector %}
 
-    {% endblock mainsector %}
+          {% endblock mainsector %}
+          <div style="display: flex;justify-content: space-between;">
+            <a  href="#" onclick="window.history.back()">←Назад</a>
+            <a href="{% url 'index' %}">Вернуться на карту</a>
+          </div>
+      </div>
+    </div>
+  </div>   
 </body>
  <script>
     document.addEventListener("DOMContentLoaded", function() {

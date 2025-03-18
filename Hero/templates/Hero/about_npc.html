@@ -1,31 +1,20 @@
 {% extends "map/base.html" %}
-    {% block mainsector %}
-    <div class="ramka">
-        <div class="between">
-            <div class="container">
-                <div style='display: flex;justify-content:flex-end'><button class='fantasy-btn-3xl fantasy-bone-n-coper' id="toggleFont"><span  contenteditable="plaintext-only" style="cursor: text;">Переключить шрифт</span></button></div>
-                {% if npc.image %}
-                <div style="display: flex;justify-content: center;"><img src="{% if npc.image %} {{ npc.image.url }} {% endif %}" alt="Сафрон пытается добыть изображения,скоро они будут доступны" style="width: 400px; height: 500px;border: 1px solid;border-radius: 1rem;text-align: center;"></div>
-                {% endif %}
-                <h1>{{ npc.name }}</h1>
-                <h3>Описание:</h3>
-                <div class="description">{{ npc.description }}</div>
-                <div class="cities">
-                    <h3>Участие в приключениях:</h3>
-                    <ul>
-                        {% for adventure in advenures %}
-                            <li><a href="{% url 'adventure_page' adventure.slug %}">{{ adventure.name }}</a></li>
-                        {% empty %}
-                            <li>NPC пока не учавствовал в приключениях</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div style="display: flex;justify-content: flex-end;">
-                    <a href="{% url 'index' %}">Вернуться на карту</a>
-                </div>
-            </div>  
-        </div>
-    </div>
-    {% endblock mainsector %}
+{% block mainsector %}
+    {% if npc.image %}
+            <div style="display: flex;justify-content: center;"><img src="{% if npc.image %} {{ npc.image.url }} {% endif %}" alt="Сафрон пытается добыть изображения,скоро они будут доступны" style="width: 400px; height: 500px;border: 1px solid;border-radius: 1rem;text-align: center;"></div>
+            {% endif %}
+            <h1>{{ npc.name }}</h1>
+            <h3>Описание:</h3>
+            <div class="description">{{ npc.description }}</div>
+            <div class="cities">
+                <h3>Участие в приключениях:</h3>
+                <ul>
+                    {% for adventure in advenures %}
+                        <li><a href="{% url 'adventure_page' adventure.slug %}">{{ adventure.name }}</a></li>
+                    {% empty %}
+                        <li>NPC пока не учавствовал в приключениях</li>
+                    {% endfor %}
+                </ul>
+            </div>
+{% endblock mainsector %}
 
-<body>
