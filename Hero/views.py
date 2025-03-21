@@ -39,7 +39,7 @@ def about_npc_page(request,npc_slug):
                 }
         return render(request,'Hero/about_npc.html',context=context)
     else:
-        return HttpResponse("<h1>У вас не доступа к информации об этом NPC</h1>")
+        return render(request,'map/zaglushka.html')
 
 def login_page(request):
     if request.method == 'POST':
@@ -47,6 +47,8 @@ def login_page(request):
         if user is not None:
             login(request, user)
             return HttpResponseRedirect('/')
+        else:
+            HttpResponse('<h1>Неверный логин или пароль</h1>')
     return render(request,'Hero/login.html')
 
 def about_adventure_page(request,adventure_slug):

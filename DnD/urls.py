@@ -19,11 +19,12 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from map.admin import Country
-from map.views import index, about_Country, about_City_or_Village
+from map.views import index, about_Country, about_City_or_Village, authors_page
 from Hero.views import about_hero_page, about_npc_page,login_page, user_logout, about_adventure_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('authors/', authors_page,name='authors_page'),
     path('', index,name='index'),
     path('login/', login_page,name='login_page'),
     path('logout/', user_logout,name='logout'),

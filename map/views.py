@@ -26,7 +26,7 @@ def about_Country(request,country_slug):
     if not request.user.is_superuser:
         was_here_or_not = hero.what_visits.filter(city__slug=country_slug)
         if not was_here_or_not.exists():
-            return HttpResponse("<h1>У вас не доступа к информации об этой локации</h1>")
+            return render(request,'map/zaglushka.html')
         return render(request,'map/about_location.html',context=context)
     else:
        return render(request,'map/about_location.html',context=context)
@@ -44,7 +44,7 @@ def about_City_or_Village(request,city_or_village_slug):
     if not request.user.is_superuser:
             was_here_or_not = hero.what_visits.filter(city__slug=city_or_village_variable.slug)
             if not was_here_or_not.exists():
-                return HttpResponse("<h1>У вас не доступа к информации об этой локации</h1>")
+                 return render(request,'map/zaglushka.html')
             else:
                 context = {'location': city_or_village_variable}   
                 return render(request,'map/about_location.html',context=context)
@@ -52,7 +52,8 @@ def about_City_or_Village(request,city_or_village_slug):
         context = {'location': city_or_village_variable}   
         return render(request,'map/about_location.html',context=context)
 
-
+def authors_page(request):
+    return render(request,'map/authors.html')
 # @login_required
 # def about_village(request,country_slug,village_slug):
 #     village_variable = Vilage.objects.get(slug=village_slug)
