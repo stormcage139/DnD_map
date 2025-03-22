@@ -113,3 +113,34 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 	
 });
+let isDragging = false;
+let startX, startY, scrollLeft, scrollTop;
+
+document.body.addEventListener('mousedown', (e) => {
+	if (e.button === 0) { // Проверяем, что нажата левая кнопка мыши
+		isDragging = true;
+		startX = e.pageX;
+		startY = e.pageY;
+		scrollLeft = window.scrollX;
+		scrollTop = window.scrollY;
+		document.body.style.cursor = 'grabbing';
+	}
+});
+
+document.body.addEventListener('mousemove', (e) => {
+	if (isDragging) {
+		const x = e.pageX - startX;
+		const y = e.pageY - startY;
+		window.scrollTo(scrollLeft - x, scrollTop - y);
+	}
+});
+
+document.body.addEventListener('mouseup', () => {
+	isDragging = false;
+	document.body.style.cursor = 'grab';
+});
+
+document.body.addEventListener('mouseleave', () => {
+	isDragging = false;
+	document.body.style.cursor = 'grab';
+});
