@@ -59,3 +59,9 @@ def about_adventure_page(request,adventure_slug):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+def all_npc(request):
+    npcs = NPC.objects.values("name", "slug") 
+    context = {'npc_list':npcs}
+    return render(request,'hero/all_npc.html',context)

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список NPC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('your_background_image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+        .npc-container {
+            width: 60%;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .npc-item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .npc-item:last-child {
+            border-bottom: none;
+        }
+        .search-box {
+            position: relative;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            font-size: 16px;
+        }
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        .suggestions {
+            position: absolute;
+            width: 100%;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .suggestion-item {
+            display:block;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .suggestion-item:hover {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="npc-container">
+        <h2 style="text-align:center">Список всех НПС</h2>
+        <div class="search-box">
+            <input type="text" id="searchInput" class="search-input" placeholder="Поиск NPC...">
+            <span class="search-icon">🔍</span>
+            <a class="suggestions" id="suggestions"></a>
+        </div>
+        <div id="npcList">
+            {% for npc in npc_list %}   
+            <div class="npc-item" data-name="{{ npc.name }}" ur="{% url "npc_page" npc.slug %}"><a href="{% url "npc_page" npc.slug %}">{{ npc.name }}</a></div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        const npcNames = [...document.querySelectorAll('.npc-item')].map(el => el.dataset.name,ur => el.dataset.ur);
+        console.log(npcNames)
+        const searchInput = document.getElementById("searchInput");
+        const suggestionsBox = document.getElementById("suggestions");
+        
+        searchInput.addEventListener("input", function() {
+            const query = this.value.toLowerCase();
+            suggestionsBox.innerHTML = "";
+            if (query) {
+                const filteredNPCs = npcNames.filter(name => name.toLowerCase().includes(query));
+                filteredNPCs.forEach(npc => {
+                    const div = document.createElement("a");
+                    div.classList.add("suggestion-item");
+                    div.textContent = npc;
+                    div.addEventListener("click", function() {
+                        searchInput.value = npc;
+                        suggestionsBox.style.display = "none";
+                    });
+                    suggestionsBox.appendChild(div);
+                });
+                suggestionsBox.style.display = "block";
+            } else {
+                suggestionsBox.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
