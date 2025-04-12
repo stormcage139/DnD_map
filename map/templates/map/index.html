@@ -26,7 +26,7 @@
     />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@   400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static "styles/style.css" %}">
 </head>
 <header>
@@ -56,6 +56,7 @@
                     {% endfor %}
                 </ul>
 	            </li>
+                
 	            <li class="menu-parent-item"><a href="#"><b>Приключения</b><i></i></a>
                     <ul class="sub-menu">
                         {% for adventure in adventures %}
@@ -64,7 +65,8 @@
                         {% endif %}
                         {% endfor %}
                     </ul>
-                    </li>
+                </li>
+                <li class="menu-parent-item"><a href="{% url "npc_page_all" %}" ><b>Все НПС</b></a></li>
 	            {% comment %} <li><a href="#"><b>Контакты</b></></li>    {% endcomment %}
                 <li><a href="{% url "authors_page" %}" ><b>Об авторах</b></a></li>
                 {% if user.is_authenticated %}

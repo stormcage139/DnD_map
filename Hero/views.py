@@ -1,4 +1,5 @@
 from re import T
+from tkinter.tix import Tree
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, HttpResponseRedirect
@@ -61,7 +62,7 @@ def user_logout(request):
     return HttpResponseRedirect('/')
 
 
-def all_npc(request):
+def all_npc(request,npc_name=None):
     npcs = NPC.objects.values("name", "slug") 
     context = {'npc_list':npcs}
     return render(request,'hero/all_npc.html',context)

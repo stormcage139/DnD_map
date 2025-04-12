@@ -31,6 +31,7 @@ urlpatterns = [
     path('adventure/<slug:adventure_slug>', about_adventure_page,name='adventure_page'),
     path('hero/<slug:hero_slug>/',about_hero_page,name='hero_page'),
     path('all/npc',all_npc,name='npc_page_all'),
+    path('all/npc/npc_name=<slug:npc_name>',all_npc,name='npc_page_filtered'),
     path('npc/<slug:npc_slug>/',about_npc_page,name='npc_page'),
     path('location_info/country/<slug:country_slug>/',about_Country,name='country_page'),
     path('location_info/city-or-village/<slug:city_or_village_slug>',about_City_or_Village,name='city_page'),
