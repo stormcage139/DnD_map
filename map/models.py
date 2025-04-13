@@ -79,7 +79,6 @@ class City(Location):
 
 
 class Hero_m(AbstractUser):
-    email = None
     image = models.ImageField(upload_to='hero_picks/',blank=True)
     visited_cities = models.ManyToManyField(Location, through="Visit",blank=True)
     description = models.TextField(blank=True)

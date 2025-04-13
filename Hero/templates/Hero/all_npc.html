@@ -97,6 +97,9 @@
         });
 
         searchInputElement.addEventListener('blur', (event) => {
+            if(event.relatedTarget && event.relatedTarget.id === "suggestion"){
+                return
+            }
             suggestionsElement.style.display = 'none';
 
         });

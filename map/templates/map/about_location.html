@@ -43,7 +43,7 @@
         </div>
         {% endfor %}
     {% endif %}
-    {% if location.npcs %}
+    {% if location.npcs.all %}
     <div class="cities">
         <h3>Связанные НПС:</h3>
         <ul>
@@ -55,7 +55,7 @@
         </ul>
     </div>
     {% endif %}
-    {% if location.what_adventures  %}
+    {% if location.what_adventures.all  %}
     <div class="cities">
         <h3>Связанные Приключения:</h3>
         <ul>
