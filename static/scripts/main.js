@@ -1,3 +1,6 @@
+window.canBeDragged = true // Для отслеживания , можно ли перетаскивать карту (например = false,когда открыта инфа о местности)
+
+
 class zoneDescription{
 	tooltip = document.querySelector('.tooltip');
 
@@ -24,28 +27,36 @@ class zoneDescription{
 	}
 
 	pushmenuFunction = function() {
+		document.body.style.cursor = 'default'
 		document.querySelector('.pushmenu').classList.toggle('open');
 		document.querySelector('.sidebar').classList.toggle('show');
 		document.querySelector('.hidden-overley').classList.toggle('show');
 		document.body.classList.toggle('sidebar-opened')
+		// if (!document.querySelector('.pushmenu').classList.contains('open')) {window.canBeDragged = true} else {window.canBeDragged = false} ; хз потом переделаю(должно запрещать перемещать карту при открытом боковом окне(панели))
 	};
 
 	showDescription(target){
-		this.popup__title.textContent = target.getAttribute('data-title');
-		this.popup__photo.setAttribute('src', target.getAttribute('data-photo'));
-		this.popup__text.textContent = this.truncateDescription(target.getAttribute('data-description'));
-		this.popupBg.classList.add('active');
-		this.more__info.setAttribute('href',target.getAttribute('more-info'))
-		this.more__info.textContent = 'Подробнее о ' + target.getAttribute('data-title') 
+		document.body.style.cursor = 'default'
+		if (window.wantToDrag){ 
+			window.canBeDragged = false; //Проверка через глобальную переменную
+			this.popup__title.textContent = target.getAttribute('data-title');
+			this.popup__photo.setAttribute('src', target.getAttribute('data-photo'));
+			this.popup__text.textContent = target.getAttribute('data-description');
+			this.popupBg.classList.add('active');
+			this.more__info.setAttribute('href',target.getAttribute('more-info'))
+			this.more__info.textContent = 'Подробнее о ' + target.getAttribute('data-title')
+		} 
+
+		
 	}
 
-	truncateDescription(description, maxSentences = 3) {
-		let sentences = description.split(".");
-		if (sentences.length > maxSentences) {
-			return sentences.slice(0, maxSentences).join(".") + "....";
-		}
-		return description;
-	}
+	// truncateDescription(description, maxSentences = 3) {
+	// 	let sentences = description.split(".");
+	// 	if (sentences.length > maxSentences) {
+	// 		return sentences.slice(0, maxSentences).join(".") + "....";
+	// 	}
+	// 	return description;
+	// }
 
 
 	bindEvents(){
@@ -60,6 +71,7 @@ class zoneDescription{
 		document.addEventListener('click', (event) => {
 			if(event.target === this.popupBg) {
 				this.popupBg.classList.remove('active');
+				window.canBeDragged = true
 			}
 		});
 
@@ -75,6 +87,7 @@ class zoneDescription{
 		
 			// отслеживаем клик клика по оверлею
 			hiddenOverley.addEventListener('click', (event) => {
+				
 				event.currentTarget.classList.toggle('show');
 				document.querySelector('.sidebar').classList.toggle('show');
 				document.querySelector('body').classList.toggle('sidebar-opened');
@@ -148,6 +161,8 @@ class zoneDescription{
 
 
 class mapDragger{
+	clientXposition = 0
+	clientYposition = 0
 	isDragging = false;
 	startX = 0 
 	startY = 0 
@@ -158,6 +173,8 @@ class mapDragger{
 	}
 	bindEvents(){
 		document.body.addEventListener('mousedown', (e) => {
+			this.clientXposition = e.clientX
+			this.clientYposition = e.clientY
 			if (e.button === 0) { // Проверяем, что нажата левая кнопка мыши
 				this.isDragging = true;
 				this.startX = e.clientX; // Используем clientX вместо pageX
@@ -171,14 +188,15 @@ class mapDragger{
 		});
 
 		document.body.addEventListener('mousemove', (e) => {
-			if (!this.isDragging) return;
+			if (!this.isDragging || !window.canBeDragged) return;
 			const x = e.clientX - this.startX;
 			const y = e.clientY - this.startY;
 			window.scrollTo(this.scrollLeft - x, this.scrollTop - y);
 			e.preventDefault(); // Предотвращаем стандартное поведение
 		});
 
-		document.body.addEventListener('mouseup', () => {
+		document.body.addEventListener('mouseup', (e) => {
+			window.wantToDrag = (this.clientXposition === e.clientX && this.clientYposition === e.clientY)
 			this.isDragging = false;
 			document.body.style.cursor = 'grab';
 			document.body.style.userSelect = ''; // Восстанавливаем выделение текста
