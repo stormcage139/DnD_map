@@ -113,34 +113,34 @@ class zoneDescription{
 
 
 
-// item.addEventListener('mouseenter', function() {
-    //     tooltip.textContent = item.getAttribute('data-title');
-    //     tooltip.style.display = 'block';
-    // });
+		// item.addEventListener('mouseenter', function() {
+			//     tooltip.textContent = item.getAttribute('data-title');
+			//     tooltip.style.display = 'block';
+			// });
 
-    // item.addEventListener('mouseleave', function() {
-    //     tooltip.textContent = item.getAttribute('data-title');
-    //     tooltip.style.display = 'none';
-    // });
+			// item.addEventListener('mouseleave', function() {
+			//     tooltip.textContent = item.getAttribute('data-title');
+			//     tooltip.style.display = 'none';
+			// });
 
-    // item.addEventListener('mousemove', function(e) {
-    //     tooltip.style.top = (e.y + 20) + 'px';
-    //     tooltip.style.left = (e.x + 20) + 'px';
-    // });
+			// item.addEventListener('mousemove', function(e) {
+			//     tooltip.style.top = (e.y + 20) + 'px';
+			//     tooltip.style.left = (e.x + 20) + 'px';
+			// });
 
 
-// Заменил н делегирования ивента родительскому блоку выше
-// continents.forEach((item) => {
-//     item.addEventListener('click', showDescription);
-// });
+		// Заменил н делегирования ивента родительскому блоку выше
+		// continents.forEach((item) => {
+		//     item.addEventListener('click', showDescription);
+		// });
 
-// continentred.forEach((item) => {
-//     item.addEventListener('click', showDescription);
-// });
+		// continentred.forEach((item) => {
+		//     item.addEventListener('click', showDescription);
+		// });
 
-// continentbl.forEach((item) => {
-//     item.addEventListener('click', showDescription);
-// });
+		// continentbl.forEach((item) => {
+		//     item.addEventListener('click', showDescription);
+		// });
 
 
 
