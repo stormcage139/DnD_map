@@ -40,8 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+
+    
     'map',
     'Hero',
+    "Reviews",
 ]
 
 MIDDLEWARE = [

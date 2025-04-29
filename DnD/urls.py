@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from map.admin import Country
@@ -35,5 +35,6 @@ urlpatterns = [
     path('npc/<slug:npc_slug>/',about_npc_page,name='npc_page'),
     path('location_info/country/<slug:country_slug>/',about_Country,name='country_page'),
     path('location_info/city-or-village/<slug:city_or_village_slug>',about_City_or_Village,name='city_page'),
+    path('reviews/',include('Reviews.urls',namespace="reviews")),
     # path('location_info/<slug:country_slug>/<slug:vilage_slug>',about_village,name='vilage_page'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
