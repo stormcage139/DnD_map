@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     "races",
+    "items",
     'map',
     'Hero',
 ]

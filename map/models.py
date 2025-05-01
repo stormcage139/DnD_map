@@ -28,6 +28,7 @@ class Location(models.Model):
 
     def __str__(self):
         return self.name
+    
     class Meta:
         ordering = ["name"]
         verbose_name = "Абстрактная модель(не трогай)"
@@ -96,10 +97,11 @@ class NPC(models.Model):
 class Visit(models.Model):
     hero = models.ForeignKey(Hero_m, on_delete=models.CASCADE,related_name='what_visits')
     city = models.ForeignKey(Location, on_delete=models.CASCADE)
-    visited_at = models.DateTimeField(auto_now_add=True)
+    visited = models.ForeignKey(to="map.Dnd_adventure",on_delete=models.SET_NULL,null=True)
     
     def __str__(self):
         return 'Посещение ' + self.city.name + ' Героем ' + self.hero.first_name
+    
     class Meta:
         verbose_name = "Посещение"
         verbose_name_plural = "Песещения"
@@ -112,6 +114,7 @@ class Dnd_adventure(models.Model):
     description = models.TextField(verbose_name='Описание приключения')
     heroes = models.ManyToManyField(to=Hero_m,blank=True,verbose_name='Учавствовашие герои')
     npcs = models.ManyToManyField(to=NPC,blank=True,verbose_name='Учавствовавшие NPCи')
+
     def __str__(self):
         return str(self.number) + ' ' + self.name
 

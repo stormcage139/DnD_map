@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 class Race(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
@@ -10,3 +9,5 @@ class Race(models.Model):
 
     class Meta:
         ordering = ["name"]
+        verbose_name = "Раса"
+        verbose_name_plural = "Расы"
