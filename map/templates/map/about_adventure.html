@@ -1,6 +1,8 @@
 {% extends "map/base.html" %}
-    
-
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'styles/about_adventure.css' %}">
+{% endblock styles %}
 {% block mainsector %}
 {% if adventure.image %}
 <img src="{{ adventure.image.url }}" alt="">
@@ -28,5 +30,15 @@
         {% endfor %}
     </ul>
 </div>
+<!-- <section class="reviews-container">
+    <h2 class="reviews-text">Отзывы</h2>
+    <div class="reviews-card">
+        <div class="reviewer-info">
+            <img class="reviewer-pic" src="{% static '4.png' %}" alt="">
+            <a href="">Имя оценщика</a>
+        </div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel culpa voluptas velit in animi nulla aspernatur architecto earum ullam possimus, deserunt officiis asperiores ab numquam tenetur maiores, dignissimos laboriosam recusandae aperiam error sunt distinctio? Accusamus id suscipit consequuntur molestiae, quae, nihil vero earum veritatis incidunt aperiam corporis, ipsam reprehenderit magni!</p>
+    </div>
+</section> -->
 {% endblock mainsector %}
 

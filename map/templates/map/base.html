@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block page_name %}{% endblock page_name %}</title>
+    {% block styles %}{% endblock styles %}
     {% comment %} <link rel="stylesheet" href="{% static "styles/style.css" %}"> {% endcomment %}
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
@@ -524,7 +525,7 @@
 
     </style>
 </head>
-<body>
+<body>  
   <div class="ramka">
     <div class="between">
         <div class="container">

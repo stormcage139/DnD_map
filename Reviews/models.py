@@ -8,7 +8,7 @@ from map.models import Hero_m, Dnd_adventure
 class Review(models.Model):
     review_text = models.TextField(verbose_name="Текст рецензии")
     event = models.OneToOneField(Dnd_adventure,verbose_name=("Приключение"), on_delete=models.CASCADE)
-    reviewer = models.OneToOneField(Hero_m,verbose_name=("Автор"), on_delete=models.CASCADE)
+    reviewer = models.OneToOneField(Hero_m,verbose_name=("Автор"), related_name="as_review",on_delete=models.CASCADE)
 
 
     def __str__(self):
