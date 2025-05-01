@@ -1,21 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models import Model
 
 
 class Location(models.Model):
-    race = {'NO':'Нет',
-            'Unknown':'Неизвестна',
-            'Humans':"Люди",
-            'S_elfs':"Высшие эльфы",
-            'Gnoms':'Гномы',
-            'Dwarfs':'Дварфы',
-            'Half_height':'Полурослки',
-            'Demons':'Демоны',
-            'Drou':"Дроу",
-            'Goblins':"Гоблины",
-            'Vampires':'Вампиры',
-            'Giffs':'Гифы',
-            'Forers_Elfs':'Лесные эльфы'}
     statuses ={
         "Unknown": "Неизвестен",
         "Martial_law": "Военное положение",
@@ -34,7 +22,7 @@ class Location(models.Model):
     description = models.TextField()
     slug = models.SlugField(max_length=60,unique=True)
     status = models.CharField(max_length=50,null=True,choices=statuses,blank=True)
-    population = models.CharField(max_length=50,null=True,choices=race,blank=True)
+    population = models.ForeignKey(to="races.Race",on_delete=models.SET_NULL,verbose_name="Преобладающая расса",null=True,blank=True)
     npcs = models.ManyToManyField("map.NPC", verbose_name="Ключевые NPC",blank=True)
     what_adventures = models.ManyToManyField("map.Dnd_adventure", verbose_name="В каких приключениях принимал участие",blank=True)
 
