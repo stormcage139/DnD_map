@@ -122,4 +122,4 @@ class Dnd_adventure(models.Model):
         ordering=['number']
         verbose_name = "Приключение"
         verbose_name_plural = "Приключения"
-    
+
