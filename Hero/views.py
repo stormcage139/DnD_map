@@ -1,12 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, HttpResponseRedirect
-from map.models import Hero_m,NPC, Dnd_adventure,City,Vilage,Country
+
+from Hero.models import HeroModel
+from map.models import NPC, City,Vilage,Country
+from adventures.models import DndAdventure
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 def about_hero_page(request,hero_slug):
-    user = Hero_m.objects.get(slug=hero_slug)
+    user = HeroModel.objects.get(slug=hero_slug)
     slugs = set([i.slug for i in user.visited_cities.all()])
     cities = City.objects.filter(slug__in=slugs)
     countries = Country.objects.filter(slug__in=slugs)
@@ -23,7 +26,7 @@ def about_hero_page(request,hero_slug):
 
 @login_required
 def about_npc_page(request,npc_slug):
-    hero = Hero_m.objects.get(username=request.user.username)
+    hero = HeroModel.objects.get(username=request.user.username)
     current_npc = NPC.objects.get(slug=npc_slug)
     advenures = Dnd_adventure.objects.filter(npcs=current_npc)
     flag = False

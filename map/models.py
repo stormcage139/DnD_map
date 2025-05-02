@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 
 
 class Location(models.Model):
@@ -36,7 +35,7 @@ class Location(models.Model):
     status = models.CharField(max_length=50,null=True,choices=statuses,blank=True)
     population = models.CharField(max_length=50,null=True,choices=race,blank=True)
     npcs = models.ManyToManyField("map.NPC", verbose_name="Ключевые NPC",blank=True)
-    what_adventures = models.ManyToManyField("map.Dnd_adventure", verbose_name="В каких приключениях принимал участие",blank=True)
+    what_adventures = models.ManyToManyField("adventures.DndAdventure", verbose_name="В каких приключениях принимал участие",blank=True)
 
     def __str__(self):
         return self.name
@@ -76,21 +75,7 @@ class City(Location):
 
 
 
-class Hero_m(AbstractUser):
-    image = models.ImageField(upload_to='hero_picks/',blank=True)
-    visited_cities = models.ManyToManyField(Location, through="Visit",blank=True)
-    description = models.TextField(blank=True)
-    slug = models.SlugField(max_length=60,unique=True)
-    know_npc = models.ManyToManyField("map.NPC", verbose_name=("Каких нпс знает"))
-    # adventures = models.ManyToManyField("map.Dnd_adventure", verbose_name=("adventures"),blank=True)
-    
-    def __str__(self):
-        return self.first_name
-    
-    class Meta:
-        db_table = "Heroes_table"
-        verbose_name = "Герой"
-        verbose_name_plural = "Герои"
+
 
 class NPC(models.Model):
     image = models.ImageField(upload_to='npc_picks/',blank=True)
@@ -105,30 +90,4 @@ class NPC(models.Model):
         verbose_name = "НПС"
         verbose_name_plural = "НПСи"
 
-class Visit(models.Model):
-    hero = models.ForeignKey(Hero_m, on_delete=models.CASCADE,related_name='what_visits')
-    city = models.ForeignKey(Location, on_delete=models.CASCADE)
-    visited_at = models.DateTimeField(auto_now_add=True)
-    
-    def __str__(self):
-        return 'Посещение ' + self.city.name + ' Героем ' + self.hero.first_name
-    class Meta:
-        verbose_name = "Посещение"
-        verbose_name_plural = "Песещения"
-    
 
-class Dnd_adventure(models.Model):
-    name = models.CharField(max_length=100,verbose_name='Название приключения')
-    number = models.DecimalField(verbose_name='Номер приключения',blank=True,null=True,max_digits=1000,decimal_places=1)
-    slug = models.SlugField(null=True,blank=True)
-    description = models.TextField(verbose_name='Описание приключения')
-    heroes = models.ManyToManyField(to=Hero_m,blank=True,verbose_name='Учавствовашие герои')
-    npcs = models.ManyToManyField(to=NPC,blank=True,verbose_name='Учавствовавшие NPCи')
-    def __str__(self):
-        return str(self.number) + ' ' + self.name
-
-    class Meta:
-        ordering=['number']
-        verbose_name = "Приключение"
-        verbose_name_plural = "Приключения"
-    

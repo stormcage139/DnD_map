@@ -1,4 +1,8 @@
 from django.contrib import admin
-from map.models import Hero_m
+
+from Hero.models import HeroModel
+
 # Register your models here.
+
+admin.site.register(HeroModel)
 
