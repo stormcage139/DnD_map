@@ -2,8 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, HttpResponseRedirect
 
-from Hero.models import HeroModel
-from map.models import NPC, City,Vilage,Country
+from Hero.models import HeroModel, NPC
+from map.models import  City,Vilage,Country
 from adventures.models import DndAdventure
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
@@ -14,7 +14,7 @@ def about_hero_page(request,hero_slug):
     cities = City.objects.filter(slug__in=slugs)
     countries = Country.objects.filter(slug__in=slugs)
     villages = Vilage.objects.filter(slug__in=slugs)
-    advenures = Dnd_adventure.objects.filter(heroes=user)
+    advenures = DndAdventure.objects.filter(heroes=user)
     context = {'hero': user,
                'villages':villages,
                'countries':countries,
@@ -28,7 +28,7 @@ def about_hero_page(request,hero_slug):
 def about_npc_page(request,npc_slug):
     hero = HeroModel.objects.get(username=request.user.username)
     current_npc = NPC.objects.get(slug=npc_slug)
-    advenures = Dnd_adventure.objects.filter(npcs=current_npc)
+    advenures = DndAdventure.objects.filter(npcs=current_npc)
     flag = False
     if request.user.know_npc.filter(slug=npc_slug).exists():
         flag = True
@@ -54,7 +54,7 @@ def login_page(request):
     return render(request,'Hero/login.html')
 
 def about_adventure_page(request,adventure_slug):
-    adventure = Dnd_adventure.objects.get(slug=adventure_slug)
+    adventure = DndAdventure.objects.get(slug=adventure_slug)
     context ={'adventure':adventure}
     return render(request,'map/about_adventure.html',context=context)
 

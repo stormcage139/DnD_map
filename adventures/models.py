@@ -1,7 +1,6 @@
 from django.db import models
 
-from Hero.models import HeroModel
-from map.models import NPC
+from Hero.models import HeroModel, NPC
 
 
 # Create your models here.

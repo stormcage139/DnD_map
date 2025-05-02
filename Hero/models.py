@@ -7,7 +7,7 @@ class HeroModel(AbstractUser):
     visited_cities = models.ManyToManyField("map.Location", through="Visit",blank=True)
     description = models.TextField(blank=True)
     slug = models.SlugField(max_length=60,unique=True)
-    know_npc = models.ManyToManyField("map.NPC", verbose_name=("Каких нпс знает"))
+    know_npc = models.ManyToManyField("Hero.NPC", verbose_name=("Каких нпс знает"))
     # adventures = models.ManyToManyField("map.Dnd_adventure", verbose_name=("adventures"),blank=True)
 
     def __str__(self):
@@ -31,4 +31,17 @@ class Visit(models.Model):
         verbose_name = "Посещение"
         verbose_name_plural = "Песещения"
 
+
+class NPC(models.Model):
+    image = models.ImageField(upload_to='npc_picks/',blank=True)
+    name = models.CharField(max_length=50)
+    description = models.TextField()
+    slug = models.SlugField(blank=True)
+
+    def __str__(self):
+        return self.name
+    class Meta:
+        ordering = ["name"]
+        verbose_name = "НПС"
+        verbose_name_plural = "НПСи"
 

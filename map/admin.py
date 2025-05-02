@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from Hero.models import Visit
+from Hero.models import Visit, NPC
 
-from map.models import Location,Country, City, Vilage,NPC
+from map.models import Location,Country, City, Vilage
 
 # Register your models here.
 
