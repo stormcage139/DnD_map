@@ -1,6 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from map.models import Location,Country,City,Vilage,Hero_m, Dnd_adventure
+
+from Hero.models import HeroModel
+from map.models import Location,Country,City,Vilage
+
+from adventures.models import DndAdventure
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -13,14 +17,14 @@ def index(request):
         context[city.slug] = city
     for village in Vilage.objects.all():
         context[village.slug] = village
-    context['heroes'] = Hero_m.objects.all()
-    context['adventures'] = Dnd_adventure.objects.all() 
+    context['heroes'] = HeroModel.objects.all()
+    context['adventures'] = DndAdventure.objects.all()
     return render(request,'map/index.html',context=context)    
 
 
 @login_required
 def about_Country(request,country_slug):
-    hero = Hero_m.objects.get(username=request.user.username)
+    hero = HeroModel.objects.get(username=request.user.username)
     country = Country.objects.get(slug=country_slug)
     context = {'location': country}
     if not request.user.is_superuser:
@@ -35,7 +39,7 @@ def about_Country(request,country_slug):
 @login_required
 def about_City_or_Village(request,city_or_village_slug):
     print("Kapusta")
-    hero = Hero_m.objects.get(username=request.user.username)
+    hero = HeroModel.objects.get(username=request.user.username)
     city_or_village_variable = City.objects.filter(slug=city_or_village_slug)
     if city_or_village_variable.exists():
         city_or_village_variable = city_or_village_variable.get()
