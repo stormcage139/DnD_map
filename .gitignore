@@ -3,3 +3,5 @@
 .lvenv/
 .vscode
 *.pyc
+*.cpython-312
+*/migrations/*.py
