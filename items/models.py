@@ -19,7 +19,9 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
-    
+    class Meta:
+        verbose_name = "Предмет"
+        verbose_name_plural = "Предметы"
 
 
 class Weapon(Item):
