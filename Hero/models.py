@@ -8,7 +8,7 @@ class HeroModel(AbstractUser):
     description = models.TextField(blank=True)
     slug = models.SlugField(max_length=60,unique=True)
     know_npc = models.ManyToManyField("Hero.NPC", verbose_name=("Каких нпс знает"))
-    # adventures = models.ManyToManyField("map.Dnd_adventure", verbose_name=("adventures"),blank=True)
+    # adventures = models.ManyToManyField("adventures.DndAdventure", verbose_name=("adventures"),blank=True)
 
     def __str__(self):
         return self.first_name
