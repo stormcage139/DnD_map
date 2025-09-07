@@ -2,6 +2,19 @@ from django.db import models
 
 
 class Location(models.Model):
+    race = {'NO':'Нет',
+            'Unknown':'Неизвестна',
+            'Humans':"Люди",
+            'S_elfs':"Высшие эльфы",
+            'Gnoms':'Гномы',
+            'Dwarfs':'Дварфы',
+            'Half_height':'Полурослки',
+            'Demons':'Демоны',
+            'Drou':"Дроу",
+            'Goblins':"Гоблины",
+            'Vampires':'Вампиры',
+            'Giffs':'Гифы',
+            'Forers_Elfs':'Лесные эльфы'}
     statuses ={
         "Unknown": "Неизвестен",
         "Martial_law": "Военное положение",
@@ -21,6 +34,7 @@ class Location(models.Model):
     slug = models.SlugField(max_length=60,unique=True)
     status = models.CharField(max_length=50,null=True,choices=statuses,blank=True)
     population = models.CharField(max_length=50,null=True,choices=race,blank=True)
+    populations = models.ManyToManyField("races.Race", verbose_name="Населяющие расы",blank=True)
     npcs = models.ManyToManyField("Hero.NPC", verbose_name="Ключевые NPC",blank=True)
     what_adventures = models.ManyToManyField("adventures.DndAdventure", verbose_name="В каких приключениях принимал участие",blank=True)
 

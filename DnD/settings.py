@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "adventures",
     'map',
     'Hero',
+    "races",
 ]
 
 MIDDLEWARE = [
