@@ -6,6 +6,7 @@ from Hero.models import HeroModel, NPC
 # Create your models here.
 class DndAdventure(models.Model):
     name = models.CharField(max_length=100,verbose_name='Название приключения')
+    image = models.ImageField(upload_to='adventure_picks/',blank=True)
     number = models.DecimalField(verbose_name='Номер приключения',blank=True,null=True,max_digits=1000,decimal_places=1)
     slug = models.SlugField(null=True,blank=True)
     description = models.TextField(verbose_name='Описание приключения')

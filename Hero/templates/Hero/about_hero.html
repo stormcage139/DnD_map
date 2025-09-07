@@ -2,7 +2,7 @@
 {% block mainsector %}
             <h1>{{ hero.first_name }} {{ hero.last_name}}</h1>
 
-            <div style="display: flex;justify-content: center;"><img src="{% if hero.image %} {{ hero.image.url }} {% endif %}" alt="Сафрон пытается добыть изображения,скоро они будут доступны" style="width: 400px; height: 500px;border: 1px solid;border-radius: 1rem;text-align: center;"></div>
+            <div style="display: flex;justify-content: center;"><img src="{% if hero.image %} {{ hero.image.url }} {% endif %}" alt="Сафрон пытается добыть изображения,скоро они будут доступны" style="width: 400px; height: 400px;border: 1px solid;border-radius: 1rem;text-align: center;"></div>
             <h3>Описание:</h3>
             <div class="description">{{ hero.description }}</div>
             <!-- <div class="cities">

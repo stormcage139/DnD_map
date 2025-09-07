@@ -9,7 +9,7 @@
     {% else %}
         <h1>{{ location.name }}</h1>
     {% endif %}
-    <div style="display: flex;justify-content: center;"><img src="{% if location.image %} {{ location.image.url }} {% endif %}" alt="Сафрон пытается добыть изображения,скоро они будут доступны" style="width: 400px; height: 500px;border: 1px solid;border-radius: 1rem;text-align: center;"></div>
+    <div style="display: flex;justify-content: center;"><img src="{% if location.image %} {{ location.image.url }} {% endif %}" alt="Сафрон пытается добыть изображения,скоро они будут доступны" style="width: 400px; height: 400px;border: 1px solid;border-radius: 1rem;text-align: center;"></div>
     {% if location.capital %}
     <h2> Столица:
         <a href="{% url 'city_page' location.capital.slug %}">г. {{ location.capital.name }} </a>
@@ -17,30 +17,30 @@
     {% endif %}
     <h3>Описание:</h3>
     <div class="description">{{ location.description|safe }}</div>
-    <div class="description"><b>Статус:</b> {{ location.get_status_display }}</div>
-    <div class="description"><b>Население:</b> {{ location.population }}</div>
+    <div><b>Статус:</b> {{ location.get_status_display }}</div>
+    <div ><b>Население:</b> {{ location.get_population_display }}</div>
     {% if location.glava %}
-    <div class="description" id='Глава локации'><b>Глава локации: </b><a href="{% url "npc_page" location.glava.slug %}">{{ location.glava }}</a></div>
+    <div id='Глава локации'><b>Глава локации: </b><a href="{% url "npc_page" location.glava.slug %}">{{ location.glava }}</a></div>
     {% endif %}
     {% if location.Land %}
-        <div class="description">
+        <div>
             <b>Принадлежность:</b><a href="{% url 'country_page'  location.Land.slug  %}"> {{ location.Land.name }}</a>
         </div>
     {% endif %}
     {% if location.cities.all.exists %}
         <p><b>Города входящие в страну:</b> {{ location.city_exists }}</p>
         {% for city in location.cities.all %}
-        <div class="description">
-            <a href="{% url 'city_page' city.slug  %}">{{ city.name }}</a>
-        </div>
+        <ul>
+            <li><a href="{% url 'city_page' city.slug  %}">{{ city.name }}</a></li>
+        </ul>
         {% endfor %}
     {% endif %}
     {% if location.villages.all.exists %}
         <p><b>Деревни входящие в страну:</b></p>
         {% for village in location.villages.all %}
-        <div class="description">
-            <a href="{% url 'city_page' village.slug  %}">{{ village.name }}</a>
-        </div>
+        <ul>
+            <li><a href="{% url 'city_page' village.slug  %}">{{ village.name }}</a></li>
+        </ul>
         {% endfor %}
     {% endif %}
     {% if location.npcs.all %}
