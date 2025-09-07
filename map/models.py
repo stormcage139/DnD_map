@@ -2,19 +2,6 @@ from django.db import models
 
 
 class Location(models.Model):
-    race = {'NO':'Нет',
-            'Unknown':'Неизвестна',
-            'Humans':"Люди",
-            'S_elfs':"Высшие эльфы",
-            'Gnoms':'Гномы',
-            'Dwarfs':'Дварфы',
-            'Half_height':'Полурослки',
-            'Demons':'Демоны',
-            'Drou':"Дроу",
-            'Goblins':"Гоблины",
-            'Vampires':'Вампиры',
-            'Giffs':'Гифы',
-            'Forers_Elfs':'Лесные эльфы'}
     statuses ={
         "Unknown": "Неизвестен",
         "Martial_law": "Военное положение",
@@ -39,6 +26,7 @@ class Location(models.Model):
 
     def __str__(self):
         return self.name
+    
     class Meta:
         ordering = ["name"]
         verbose_name = "Абстрактная модель(не трогай)"

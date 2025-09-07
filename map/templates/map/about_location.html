@@ -18,7 +18,7 @@
     <h3>Описание:</h3>
     <div class="description">{{ location.description|safe }}</div>
     <div class="description"><b>Статус:</b> {{ location.get_status_display }}</div>
-    <div class="description"><b>Население:</b> {{ location.get_population_display }}</div>
+    <div class="description"><b>Население:</b> {{ location.population }}</div>
     {% if location.glava %}
     <div class="description" id='Глава локации'><b>Глава локации: </b><a href="{% url "npc_page" location.glava.slug %}">{{ location.glava }}</a></div>
     {% endif %}
