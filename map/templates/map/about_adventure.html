@@ -9,7 +9,7 @@
 {% endif %}
 <h1>{{ adventure.name }}</h1>
 <h3>Описание:</h3>
-<div class="description">{{ adventure.description }}</div>
+<div class="description">{{ adventure.description|safe|linebreaks }}</div>
 <div class="cities">
     <h3>Герои,учавствовавшие в приключении</h3>
     <ul>

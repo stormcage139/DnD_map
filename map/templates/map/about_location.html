@@ -16,7 +16,7 @@
     </h2>
     {% endif %}
     <h3>Описание:</h3>
-    <div class="description">{{ location.description|safe }}</div>
+    <div class="description">{{ location.description|safe|linebreaks }}</div>
     <div class="description"><b>Статус:</b> {{ location.get_status_display }}</div>
     <div class="description"><b>Население:</b> {{ location.get_population_display }}</div>
     {% if location.glava %}

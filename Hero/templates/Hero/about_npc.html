@@ -5,7 +5,7 @@
             {% endif %}
             <h1>{{ npc.name }}</h1>
             <h3>Описание:</h3>
-            <div class="description">{{ npc.description }}</div>
+            <div class="description">{{ npc.description|safe|linebreaks }}</div>
             <div class="cities">
                 <h3>Участие в приключениях:</h3>
                 <ul>

@@ -10,19 +10,58 @@
             border: 1px solid rgba(139, 90, 43, 0.3);
             padding: 10px;
         }
-        .npc-item {
+        .npc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 10px;
+        }
+        .npc-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(139, 90, 43, 0.3);
+            border-radius: 10px;
             padding: 15px;
-            border-bottom: 1px solid rgba(139, 90, 43, 0.3);
-            transition: background-color 0.3s ease;
-            border-radius: 8px;
-            margin-bottom: 5px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: fit-content;
         }
-        .npc-item:hover {
+        .npc-card:hover {
             background: rgba(139, 90, 43, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(139, 90, 43, 0.2);
         }
-        .npc-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
+        .npc-image {
+            width: 100%;
+            height: 156px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(139, 90, 43, 0.2);
+        }
+        .npc-name {
+            color: #8b5a2b;
+            font-weight: 500;
+            font-size: 1.5rem;
+            margin: 0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .npc-card:hover .npc-name {
+            color: #5d3d1c;
+        }
+        .no-image {
+            width: 100%;
+            height: 156px;
+            background: rgba(139, 90, 43, 0.1);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cdaa7d;
+            font-size: 0.9rem;
+            border: 1px solid rgba(139, 90, 43, 0.2);
         }
         .search-box {
             position: relative;
@@ -82,12 +121,19 @@
                 max-height: 600px;
                 padding: 8px;
             }
-            .npc-item {
-                padding: 12px;
-                margin-bottom: 3px;
+            .npc-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 5px;
             }
-            .npc-item a {
-                font-size: 1rem;
+            .npc-card {
+                padding: 12px;
+            }
+            .npc-image, .no-image {
+                height: 130px;
+            }
+            .npc-name {
+                font-size: 1.35rem;
             }
             .search-input {
                 font-size: 16px; /* Предотвращает зум на iOS */
@@ -107,11 +153,19 @@
                 max-height: 500px;
                 padding: 5px;
             }
-            .npc-item {
+            .npc-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+                padding: 3px;
+            }
+            .npc-card {
                 padding: 10px;
             }
-            .npc-item a {
-                font-size: 0.95rem;
+            .npc-image, .no-image {
+                height: 104px;
+            }
+            .npc-name {
+                font-size: 1.275rem;
             }
             .search-input {
                 padding: 10px;
@@ -124,16 +178,25 @@
 <h2 style="text-align:center">Список всех НПС</h2>
         <div class="search-box">
             <input type="text" id="searchInput" class="search-input" placeholder="Поиск NPC...">
-            <span class="search-icon">🔍</span>
+{% comment %}
+                <span class="search-icon">🔍</span>
+{% endcomment %}
             <div class="suggestions" id="suggestions">
                 <a class="suggestion-item" id="suggestion"></a>
             </div>
 
         </div>
     <div class="npc-container">
-        <div id="npcList">
+        <div class="npc-grid" id="npcList">
             {% for npc in npc_list %}   
-            <div class="npc-item" data-name="{{ npc.name }}" ur="{% url "npc_page" npc.slug %}"><a href="{% url "npc_page" npc.slug %}">{{ npc.name }}</a></div>
+            <div class="npc-card" data-name="{{ npc.name }}" onclick="window.location.href='{% url "npc_page" npc.slug %}'">
+                {% if npc.image %}
+                    <img src="{{ npc.image.url }}" alt="{{ npc.name }}" class="npc-image">
+                {% else %}
+                    <div class="no-image">Нет фото</div>
+                {% endif %}
+                <h3 class="npc-name">{{ npc.name }}</h3>
+            </div>
             {% endfor %}
         </div>
     </div>
@@ -166,12 +229,15 @@
 
 
 
-        const npcItemElements = document.getElementsByClassName('npc-item')
+        const npcItemElements = document.getElementsByClassName('npc-card')
 
         const NpcFinder = (npcName) => {
             for ( let i = 0; i < npcItemElements.length; i++) {
                 if (npcItemElements[i].innerText.toLowerCase().includes(npcName.toLowerCase())){
-                    return npcItemElements[i].firstElementChild;
+                    return {
+                        textContent: npcItemElements[i].querySelector('.npc-name').textContent,
+                        href: npcItemElements[i].onclick.toString().match(/window\.location\.href='([^']+)'/)[1]
+                    };
                 }
 
             }

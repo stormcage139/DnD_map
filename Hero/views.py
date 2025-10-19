@@ -64,6 +64,6 @@ def user_logout(request):
 
 
 def all_npc(request,npc_name=None):
-    npcs = NPC.objects.values("name", "slug") 
+    npcs = NPC.objects.all() 
     context = {'npc_list':npcs}
     return render(request,'Hero/all_npc.html',context)
