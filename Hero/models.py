@@ -20,7 +20,7 @@ class HeroModel(AbstractUser):
 
 
 class Visit(models.Model):
-    hero = models.ForeignKey(HeroModel, on_delete=models.CASCADE, related_name='what_visits')
+    hero = models.ForeignKey("Hero.HeroModel", on_delete=models.CASCADE, related_name='what_visits')
     city = models.ForeignKey("map.Location", on_delete=models.CASCADE)
     visited_at = models.DateTimeField(auto_now_add=True)
 

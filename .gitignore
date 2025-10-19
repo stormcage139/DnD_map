@@ -4,7 +4,6 @@
 .vscode
 *.pyc
 *.cpython-312
-*/migrations/*.py
 .python-version
 pyproject.toml
 uv.lock

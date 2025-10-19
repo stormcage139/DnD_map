@@ -55,7 +55,7 @@ class Country(Location):
     
 class Vilage(Location):
     glava = models.OneToOneField("Hero.NPC", verbose_name=("Представитель"), on_delete=models.SET_NULL,null=True,blank=True,default='Неизвестно')
-    Land = models.ForeignKey(to=Country,on_delete=models.SET_NULL,null=True,related_name="villages",blank=True)
+    Land = models.ForeignKey(to="map.Country",on_delete=models.SET_NULL,null=True,related_name="villages",blank=True)
     class Meta:
         verbose_name = "Деревня"
         verbose_name_plural = "Деревни"
@@ -63,7 +63,7 @@ class Vilage(Location):
 
 class City(Location):
     glava = models.OneToOneField("Hero.NPC", verbose_name=("Мэр"), on_delete=models.SET_NULL,null=True,blank=True,default='Неизвестно')
-    Land = models.ForeignKey(to=Country,on_delete=models.SET_NULL,null=True,related_name="cities")
+    Land = models.ForeignKey(to="map.Country",on_delete=models.SET_NULL,null=True,related_name="cities")
 
 
     def is_city(self):
