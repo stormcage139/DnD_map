@@ -3,7 +3,9 @@
 
 {% block mainsector %}
 {% if adventure.image %}
-<img src="{{ adventure.image.url }}" alt="">
+<div style="display: flex;justify-content: center; margin-bottom: 20px;">
+    <img src="{{ adventure.image.url }}" alt="{{ adventure.name }}" class="location-image" style="border: 1px solid; border-radius: 1rem;">
+</div>
 {% endif %}
 <h1>{{ adventure.name }}</h1>
 <h3>Описание:</h3>

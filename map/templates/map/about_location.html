@@ -9,7 +9,7 @@
     {% else %}
         <h1>{{ location.name }}</h1>
     {% endif %}
-    <div style="display: flex;justify-content: center;"><img src="{% if location.image %} {{ location.image.url }} {% endif %}" alt="Сафрон пытается добыть изображения,скоро они будут доступны" style="width: 400px; height: 500px;border: 1px solid;border-radius: 1rem;text-align: center;"></div>
+    <div style="display: flex;justify-content: center;"><img src="{% if location.image %} {{ location.image.url }} {% endif %}" alt="Сафрон пытается добыть изображения,скоро они будут доступны" class="location-image" style="border: 1px solid; border-radius: 1rem; text-align: center;"></div>
     {% if location.capital %}
     <h2> Столица:
         <a href="{% url 'city_page' location.capital.slug %}">г. {{ location.capital.name }} </a>

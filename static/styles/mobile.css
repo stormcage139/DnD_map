@@ -1,0 +1,199 @@
+/* Дополнительные мобильные стили для D&D проекта */
+
+/* Улучшенная поддержка touch-устройств */
+@media (hover: none) and (pointer: coarse) {
+    /* Стили для touch-устройств */
+    .fantasy-btn-3xl:hover {
+        transform: none;
+    }
+    
+    .nav-links a:hover {
+        transform: none;
+    }
+    
+    .hero-image:hover, .npc-image:hover, .location-image:hover {
+        transform: none;
+    }
+    
+    .toggleFont-btn:hover {
+        transform: none;
+    }
+    
+    /* Улучшенные touch-цели */
+    .cities li a {
+        min-height: 48px;
+        padding: 12px 8px;
+    }
+    
+    .npc-item a {
+        min-height: 48px;
+        padding: 12px 8px;
+    }
+}
+
+/* Улучшенная поддержка для очень маленьких экранов */
+@media (max-width: 320px) {
+    .container {
+        padding: 5px;
+        margin: 2px 0;
+    }
+    
+    h1 {
+        font-size: 1.2rem;
+        line-height: 1.1;
+    }
+    
+    h2 {
+        font-size: 1.1rem;
+    }
+    
+    h3 {
+        font-size: 1rem;
+    }
+    
+    .description {
+        font-size: 0.9rem;
+        max-height: 200px;
+        padding: 8px;
+    }
+    
+    .fantasy-btn-3xl {
+        --scale: 0.35;
+    }
+    
+    .nav-links a {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    /* Очень маленькие изображения для минимальных экранов */
+    .hero-image, .npc-image, .location-image {
+        max-width: 80%;
+    }
+    
+    /* Компактная кнопка шрифта для очень маленьких экранов */
+    .toggleFont-btn {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+        min-height: 32px;
+    }
+}
+
+/* Улучшенная поддержка для ландшафтной ориентации */
+@media (max-width: 768px) and (orientation: landscape) {
+    .map_wrapper {
+        height: 50vh;
+    }
+    
+    .container {
+        min-height: 80vh;
+    }
+    
+    .description {
+        max-height: 200px;
+    }
+    
+    /* Компактные изображения в ландшафтной ориентации */
+    .hero-image, .npc-image, .location-image {
+        max-width: 40%;
+    }
+}
+
+/* Улучшенная поддержка для портретной ориентации */
+@media (max-width: 768px) and (orientation: portrait) {
+    .map_wrapper {
+        height: 60vh;
+    }
+    
+    .container {
+        min-height: 90vh;
+    }
+}
+
+/* Улучшенная поддержка для устройств с высокой плотностью пикселей */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-image, .npc-image, .location-image {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Улучшенная поддержка для iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    .search-input {
+        font-size: 16px; /* Предотвращает зум на iOS */
+    }
+    
+    .nav-links a {
+        -webkit-tap-highlight-color: rgba(139, 90, 43, 0.3);
+    }
+    
+    .cities li a {
+        -webkit-tap-highlight-color: rgba(139, 90, 43, 0.3);
+    }
+}
+
+/* Улучшенная поддержка для Android */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .container {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .npc-container {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Улучшенная поддержка для темной темы */
+@media (prefers-color-scheme: dark) {
+    .description {
+        background: rgba(0, 0, 0, 0.1);
+        border-color: rgba(139, 90, 43, 0.5);
+    }
+    
+    .npc-container {
+        background: rgba(0, 0, 0, 0.1);
+        border-color: rgba(139, 90, 43, 0.5);
+    }
+}
+
+/* Улучшенная поддержка для уменьшенной анимации */
+@media (prefers-reduced-motion: reduce) {
+    .fantasy-btn-3xl {
+        transition: none;
+    }
+    
+    .nav-links a {
+        transition: none;
+    }
+    
+    .hero-image, .npc-image, .location-image {
+        transition: none;
+    }
+    
+    .container:hover {
+        transform: none;
+        transition: none;
+    }
+    
+    .toggleFont-btn {
+        transition: none;
+    }
+}
+
+/* Улучшенная поддержка для высокого контраста */
+@media (prefers-contrast: high) {
+    .description {
+        border: 2px solid rgba(139, 90, 43, 0.8);
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .npc-container {
+        border: 2px solid rgba(139, 90, 43, 0.8);
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .nav-links a {
+        border: 2px solid rgba(139, 90, 43, 0.8);
+    }
+}
